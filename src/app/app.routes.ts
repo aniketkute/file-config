@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DashboardUiComponent } from '../../projects/dashboard-ui/src/public-api';
+import { DashboardUiComponent } from '../../projects/file-config-library/src/public-api';
 
 export const routes: Routes = [
   {

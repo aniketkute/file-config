@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DashboardUiComponent } from './dashboard-ui.component';
+import { DashboardUiComponent } from './file-config-library.component';
 
 describe('DashboardUiComponent', () => {
   let component: DashboardUiComponent;
@@ -8,10 +8,9 @@ describe('DashboardUiComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardUiComponent]
-    })
-    .compileComponents();
-    
+      imports: [DashboardUiComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(DashboardUiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

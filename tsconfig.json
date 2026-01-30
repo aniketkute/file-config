@@ -3,8 +3,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "dashboard-ui": [
-        "./dist/dashboard-ui"
+      "file-config-library": [
+        "./dist/file-config-library"
       ]
     },
     "outDir": "./dist/out-tsc",

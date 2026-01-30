@@ -3,11 +3,11 @@ import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'lib-dashboard-ui',
+  selector: 'lib-file-config-library',
   standalone: true,
   imports: [HeaderComponent, FormsModule],
-  templateUrl: `./dashboard-ui.component.html`,
-  styleUrl: `./dashboard-ui.component.scss`,
+  templateUrl: `./file-config-library.component.html`,
+  styleUrl: `./file-config-library.component.scss`,
 })
 export class DashboardUiComponent {
   menus: any = [

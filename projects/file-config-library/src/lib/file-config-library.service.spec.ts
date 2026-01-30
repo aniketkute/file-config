@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DashboardUiService } from './dashboard-ui.service';
+import { DashboardUiService } from './file-config-library.service';
 
 describe('DashboardUiService', () => {
   let service: DashboardUiService;

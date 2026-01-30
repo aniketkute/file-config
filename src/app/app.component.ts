@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { DashboardUiComponent } from '../../projects/dashboard-ui/src/public-api';
+import { DashboardUiComponent } from '../../projects/file-config-library/src/public-api';
 
 @Component({
   selector: 'app-root',
