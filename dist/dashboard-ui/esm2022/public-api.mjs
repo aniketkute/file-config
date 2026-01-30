@@ -1,0 +1,7 @@
+/*
+ * Public API Surface of dashboard-ui
+ */
+// export * from './lib/dashboard-ui.service';
+// export * from './lib/dashboard-ui.component';
+export * from './lib/dashboard-ui.component';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3Byb2plY3RzL2Rhc2hib2FyZC11aS9zcmMvcHVibGljLWFwaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7R0FFRztBQUVILDhDQUE4QztBQUM5QyxnREFBZ0Q7QUFDaEQsY0FBYyw4QkFBOEIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qXHJcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiBkYXNoYm9hcmQtdWlcclxuICovXHJcblxyXG4vLyBleHBvcnQgKiBmcm9tICcuL2xpYi9kYXNoYm9hcmQtdWkuc2VydmljZSc7XHJcbi8vIGV4cG9ydCAqIGZyb20gJy4vbGliL2Rhc2hib2FyZC11aS5jb21wb25lbnQnO1xyXG5leHBvcnQgKiBmcm9tICcuL2xpYi9kYXNoYm9hcmQtdWkuY29tcG9uZW50JztcclxuIl19

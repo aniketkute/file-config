@@ -1,0 +1,7 @@
+/*
+ * Public API Surface of file-config-library
+ */
+// export * from './lib/file-config-library.service';
+// export * from './lib/file-config-library.component';
+export * from './lib/file-config-library.component';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3Byb2plY3RzL2ZpbGUtY29uZmlnLWxpYnJhcnkvc3JjL3B1YmxpYy1hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0dBRUc7QUFFSCxxREFBcUQ7QUFDckQsdURBQXVEO0FBQ3ZELGNBQWMscUNBQXFDLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyIvKlxyXG4gKiBQdWJsaWMgQVBJIFN1cmZhY2Ugb2YgZmlsZS1jb25maWctbGlicmFyeVxyXG4gKi9cclxuXHJcbi8vIGV4cG9ydCAqIGZyb20gJy4vbGliL2ZpbGUtY29uZmlnLWxpYnJhcnkuc2VydmljZSc7XHJcbi8vIGV4cG9ydCAqIGZyb20gJy4vbGliL2ZpbGUtY29uZmlnLWxpYnJhcnkuY29tcG9uZW50JztcclxuZXhwb3J0ICogZnJvbSAnLi9saWIvZmlsZS1jb25maWctbGlicmFyeS5jb21wb25lbnQnO1xyXG4iXX0=
