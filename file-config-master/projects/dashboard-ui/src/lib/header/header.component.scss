@@ -1,0 +1,89 @@
+.header-container {
+  //variables
+  --background-color: rgb(24, 24, 27);
+  --border-color: #d0d5dd80;
+
+  height: 60px;
+  overflow: hidden;
+  background-color: var(var(--background-color));
+  border-bottom: 1px solid var(--border-color);
+
+  .header-content {
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 100%;
+
+    .left__content {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+
+      .svg-image {
+        height: 60px;
+        min-width: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+      }
+
+      .text-logo {
+        font-weight: bolder;
+        line-height: 24.2px;
+        text-align: left;
+      }
+    }
+
+    .right__content {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+
+      .profile-container {
+        gap: 10px;
+        width: 150px;
+
+        img {
+          border-radius: 50%;
+        }
+
+        p {
+          font-size: 14px;
+          font-weight: 500;
+          margin: 0;
+          width: 100px;
+          overflow: hidden;
+          text-wrap: nowrap;
+        }
+      }
+
+      .theme-icon-container {
+        border-radius: 50%;
+        background-color: #000;
+        color: #000;
+        padding: 5px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+        cursor: pointer;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      .animate {
+        animation: fadeIn 500ms ease-out backwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

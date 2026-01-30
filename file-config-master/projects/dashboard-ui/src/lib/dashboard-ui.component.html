@@ -1,0 +1,41 @@
+<div class="dashboard-component p-0 m-0">
+  <div><app-header></app-header></div>
+
+  <!-- input filed to search style / sketch number -->
+  <div class="p-10 col d-flex flex-column">
+    <label class="form-group-label text-dark mb-1">Enter Number</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter Number"
+      [(ngModel)]="styleSketchNumber"
+    />
+  </div>
+
+  <div class="row m-0 p-0 master-container">
+    <div class="col-12 m-0 p-0 d-flex">
+      <div class="side__bar col-2 d-flex flex-column">
+        <!-- Sticky search bar -->
+        <!-- <div class="sticky-search border-one border-one border-gray">
+        <mobi-office-lib-input-field type="text" label="" [isRequired]="true" (keyupEmitter)="filterMenusByName($event)" [placeholder]="'Search'" class="w-100"> </mobi-office-lib-input-field>
+      </div> -->
+
+        <!-- Scrollable menu items -->
+        <!-- <div class="menu-list"> -->
+        @for (item of menus; track item; let index = $index) {
+        <div class="menu-item">
+          <div
+            class="list-item cursor-pointer border-bottom-one opacity-50 h-50"
+            (click)="itemSelected(item)"
+          >
+            <label class="menu-header w-100 cursor-pointer"
+              >{{ item.Name }}</label
+            >
+          </div>
+        </div>
+        }
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</div>
