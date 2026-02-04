@@ -4,19 +4,24 @@
   --border-color: #d0d5dd80;
   --gray-dark-3: #3a3a3a;
   --input-background-color: rgb(40, 40, 40);
+  --text-dark-color: #fff;
+  --text-white-color: #000;
+  --button-color: #ab7340;
 
+  //default css to class
   height: 100vh;
   background-color: var(--input-background-color);
+
   .h-100 {
     height: 100px;
   }
 
   .text-dark {
-    color: #fff;
+    color: var(--text-dark-color);
   }
 
   .text-white {
-    color: #000;
+    color: var(--text-white-color);
   }
 
   .h-50 {
@@ -27,10 +32,18 @@
     padding: 10px;
   }
 
-  input.form-control.form-group {
-    background-color: var(--background-color) !important;
-    border: 1px solid var(--gray-dark-3) !important;
-    color: #fff;
+  .opacity-50 {
+    opacity: 0.5;
+  }
+
+  .input-background-color {
+    background-color: var(--background-color) !important; /* input background */
+  }
+
+  /* Placeholder color */
+  .input-background-color::placeholder {
+    color: var(--text-dark-color);
+    opacity: 1; /* important for Firefox */
   }
 
   .form-group-label {
@@ -62,8 +75,9 @@
       overflow-y: auto;
       max-height: calc(100vh - 60px); // 60px for header height
       border-right: 1px solid #d0d5dd;
-      background-color: rgb(24, 24, 27);
-      color: #fff;
+      background-color: var(--background-color);
+      color: var(--text-dark-color);
+      flex-shrink: 0;
     }
 
     .menu-item {
@@ -72,6 +86,10 @@
 
     .dropdown-indicator {
       margin-left: auto;
+    }
+
+    .list-item.active-menu {
+      background-color: var(--button-color); /* active background */
     }
 
     .child-menu {
@@ -101,8 +119,50 @@
     .side__bar {
       display: flex;
       flex-direction: column;
-      height: 100vh; /* Full height */
+      height: 91vh;
       overflow: hidden; /* Prevents overflow */
     }
+  }
+
+  .display-container {
+    background-color: var(--background-color);
+    overflow-y: auto;
+    max-height: 91vh;
+  }
+
+  .custom-table {
+    border-collapse: collapse;
+  }
+
+  .custom-table th,
+  .custom-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border: none; /* no column borders */
+  }
+
+  .custom-table tbody tr {
+    border-bottom: none;
+  }
+
+  .custom-table tbody tr {
+    border-bottom: 1px solid var(--text-dark-color); /* row separation */
+  }
+
+  .version-separator td {
+    height: 10px;
+    border-bottom: 2px solid var(--text-dark-color);
+  }
+
+  .download-icon {
+    font-size: 16px;
+    color: var(--button-color);
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
+  .download-icon:hover {
+    opacity: 1;
+    transform: scale(1.1);
   }
 }
