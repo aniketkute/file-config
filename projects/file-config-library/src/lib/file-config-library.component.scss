@@ -1,12 +1,24 @@
-.dashboard-component {
-  //variables
+:host {
   --background-color: rgb(24, 24, 27);
   --border-color: #d0d5dd80;
   --gray-dark-3: #3a3a3a;
   --input-background-color: rgb(40, 40, 40);
-  --text-dark-color: #fff;
-  --text-white-color: #000;
+  --text-dark-color: #000;
+  --text-white-color: #fff;
   --button-color: #ab7340;
+
+  display: block; // important for layout
+}
+
+.dashboard-component {
+  //variables
+  // --background-color: rgb(24, 24, 27);
+  // --border-color: #d0d5dd80;
+  // --gray-dark-3: #3a3a3a;
+  // --input-background-color: rgb(40, 40, 40);
+  // --text-dark-color: #fff;
+  // --text-white-color: #000;
+  // --button-color: #ab7340;
 
   //default css to class
   height: 100vh;
@@ -16,11 +28,11 @@
     height: 100px;
   }
 
-  .text-dark {
+  .text-dark-color {
     color: var(--text-dark-color);
   }
 
-  .text-white {
+  .text-white-color {
     color: var(--text-white-color);
   }
 
@@ -32,9 +44,9 @@
     padding: 10px;
   }
 
-  .opacity-50 {
-    opacity: 0.5;
-  }
+  // .opacity-50 {
+  //   opacity: 0.5;
+  // }
 
   .input-background-color {
     background-color: var(--background-color) !important; /* input background */
@@ -42,7 +54,7 @@
 
   /* Placeholder color */
   .input-background-color::placeholder {
-    color: var(--text-dark-color);
+    color: var(--text-white-color);
     opacity: 1; /* important for Firefox */
   }
 
@@ -73,10 +85,10 @@
     .side__bar {
       width: 200px;
       overflow-y: auto;
-      max-height: calc(100vh - 60px); // 60px for header height
+      max-height: calc(100vh - 80px); // 60px for header height
       border-right: 1px solid #d0d5dd;
       background-color: var(--background-color);
-      color: var(--text-dark-color);
+      color: var(--text-white-color);
       flex-shrink: 0;
     }
 
@@ -145,24 +157,25 @@
     border-bottom: none;
   }
 
-  .custom-table tbody tr {
-    border-bottom: 1px solid var(--text-dark-color); /* row separation */
-  }
+  // .custom-table tbody tr {
+  //   border-bottom: 1px solid var(--text-white-color); /* row separation */
+  // }
 
   .version-separator td {
     height: 10px;
-    border-bottom: 2px solid var(--text-dark-color);
+    border-bottom: 2px solid var(--text-white-color);
+    opacity: 0.5;
   }
 
   .download-icon {
     font-size: 16px;
     color: var(--button-color);
     cursor: pointer;
-    opacity: 0.8;
+    // opacity: 0.5;
   }
 
   .download-icon:hover {
-    opacity: 1;
+    // opacity: 0.5;
     transform: scale(1.1);
   }
 }

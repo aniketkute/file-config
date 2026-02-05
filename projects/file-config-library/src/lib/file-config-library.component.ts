@@ -1,7 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MasterService } from './services/master.service';
-
 @Component({
   selector: 'lib-file-config-library',
   standalone: true,
@@ -64,7 +63,6 @@ export class DashboardUiComponent implements OnInit {
         url: details.url,
       })),
     }));
-    console.log(this.tableData);
   }
 
   enterPressed() {
@@ -74,17 +72,27 @@ export class DashboardUiComponent implements OnInit {
       isAllVersionNeeded: 1,
     };
 
-    this.masterService
-      .getDetailsWithProcess(payload, this.BASE_URL)
-      .subscribe((res: any) => {
+    this.masterService.getDetailsWithProcess(payload, this.BASE_URL).subscribe({
+      next: (res: any) => {
         this.styleDetailsForDownload = res;
-        if (!!res?.filePaths) {
-          const objectKeys = Object.keys(res?.filePaths);
-          this.menus = objectKeys.map((item: any) => {
-            return { processName: item, isSelected: false };
-          });
+
+        if (res?.filePaths) {
+          const objectKeys = Object.keys(res.filePaths);
+          this.menus = objectKeys.map((item) => ({
+            processName: item,
+            isSelected: false,
+          }));
+        } else {
+          this.menus = [];
+          this.styleDetailsForDownload = [];
         }
-      });
+      },
+      error: (err) => {
+        this.menus = [];
+        this.styleDetailsForDownload = [];
+        this.tableData = [];
+      },
+    });
   }
 
   downloadFile(file: any) {
