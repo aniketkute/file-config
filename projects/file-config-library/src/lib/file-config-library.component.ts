@@ -23,6 +23,9 @@ export class DashboardUiComponent implements OnInit {
   selectedProcessName: string | null = null;
   tableData: any[] = [];
   styleDetailsForDownload: any;
+  selectedTab: 'latest' | 'history' = 'latest';
+  latestTableData: any[] = [];
+  historyTableData: any[] = [];
 
   onInit() {
     this.getAllMaster();
@@ -46,6 +49,7 @@ export class DashboardUiComponent implements OnInit {
         item.isSelected = false;
     });
 
+    console.log(this.styleDetailsForDownload);
     if (this.selectedProcessName) {
       const data =
         this.styleDetailsForDownload.filePaths[this.selectedProcessName];
@@ -54,15 +58,80 @@ export class DashboardUiComponent implements OnInit {
     }
   }
 
+  // prepareTableData(data: any) {
+  //   this.tableData = Object.entries(data).map(([version, files]: any) => ({
+  //     version,
+  //     files: Object.entries(files).map(([fileName, details]: any) => ({
+  //       fileName,
+  //       createdDate: details.createdDate,
+  //       url: details.url,
+  //     })),
+  //   }));
+
+  //   console.log(this.tableData);
+  // }
+
   prepareTableData(data: any) {
-    this.tableData = Object.entries(data).map(([version, files]: any) => ({
-      version,
-      files: Object.entries(files).map(([fileName, details]: any) => ({
-        fileName,
-        createdDate: details.createdDate,
-        url: details.url,
-      })),
-    }));
+    const allFiles: any[] = [];
+
+    // Flatten all versions into single array
+    Object.entries(data).forEach(([version, files]: any) => {
+      Object.entries(files).forEach(([fileName, details]: any) => {
+        allFiles.push({
+          version,
+          fileName,
+          createdDate: details.createdDate,
+          url: details.url,
+        });
+      });
+    });
+
+    // Sort by createdDate DESC
+    allFiles.sort((a, b) => {
+      const d1: any = this.parseDate(a.createdDate);
+      const d2: any = this.parseDate(b.createdDate);
+      return d2 - d1;
+    });
+
+    if (allFiles.length > 0) {
+      // 🔥 First element only → Latest
+      const latestFile = allFiles[0];
+
+      this.latestTableData = [
+        {
+          version: latestFile.version,
+          files: [latestFile],
+        },
+      ];
+
+      // Remaining → History (group back by version)
+      const remaining = allFiles.slice(1);
+
+      const groupedHistory: any = {};
+
+      remaining.forEach((file) => {
+        if (!groupedHistory[file.version]) {
+          groupedHistory[file.version] = [];
+        }
+        groupedHistory[file.version].push(file);
+      });
+
+      this.historyTableData = Object.entries(groupedHistory).map(
+        ([version, files]) => ({
+          version,
+          files,
+        }),
+      );
+    }
+
+    console.log('Latest:', this.latestTableData);
+    console.log('History:', this.historyTableData);
+  }
+
+  parseDate(dateStr: string): Date {
+    const [datePart, timePart] = dateStr.split(' ');
+    const [day, month, year] = datePart.split('-');
+    return new Date(`${year}-${month}-${day}T${timePart}`);
   }
 
   enterPressed() {

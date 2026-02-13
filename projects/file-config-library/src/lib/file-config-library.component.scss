@@ -178,4 +178,32 @@
     // opacity: 0.5;
     transform: scale(1.1);
   }
+
+  //region for tabs
+  .tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .tab-btn {
+    padding: 6px 18px;
+    background-color: var(--input-background-color);
+    cursor: pointer;
+    border-radius: 6px;
+    color: var(--text-white-color);
+    transition: all 0.3s ease;
+  }
+
+  /* 🔥 Active Tab */
+  .tab-btn.active {
+    background-color: var(--button-color);
+    color: var(--text-white-color);
+  }
+
+  /* Optional hover effect */
+  .tab-btn:hover {
+    background-color: var(--button-color);
+    color: var(--text-white-color);
+  }
 }
