@@ -9,10 +9,14 @@ export declare class DashboardUiComponent implements OnInit {
     selectedProcessName: string | null;
     tableData: any[];
     styleDetailsForDownload: any;
+    selectedTab: 'latest' | 'history';
+    latestTableData: any[];
+    historyTableData: any[];
     onInit(): void;
     private getAllMaster;
     itemSelected(item: any): void;
     prepareTableData(data: any): void;
+    parseDate(dateStr: string): Date;
     enterPressed(): void;
     downloadFile(file: any): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<DashboardUiComponent, never>;
