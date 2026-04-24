@@ -1,23 +1,15 @@
-@if(loader){
-  <div id="wrapper">
-    @if (loaderType === "circle") {
-
-      <div class="profile-main-loader">
-        <div class="loader spinner-container">
-          <div class="spinner-border text-yellow" role="status"></div>
-        </div>
-      </div>
-    }
-    @if (loaderType === "bar") {
-      <div style="position: absolute; top: 0px; height: 2px;" class="w-100">
-        <mat-progress-bar color="primary" mode="indeterminate" class="mat-progress-bar"> </mat-progress-bar>
-      </div>
-    }
+<div id="wrapper" *ngIf="!!loader">
+  <div class="profile-main-loader" *ngIf="loaderType === 'circle'">
+    <div class="loader spinner-container">
+      <div class="spinner-border text-yellow" role="status"></div>
+    </div>
   </div>
-}
+  <div style="position: absolute; top: 0px;" class="w-100" *ngIf="loaderType === 'bar'">
+    <mat-progress-bar color="primary" mode="indeterminate" class="mat-progress-bar"> </mat-progress-bar>
+  </div>
+</div>
 
 <div class="dashboard-component p-0 m-0">
-  <!-- input filed to search style / sketch number -->
   <div class="p-10 col-3 d-flex flex-column">
     <label class="form-group-label text-white-color mb-1">Enter ID</label>
     <input
@@ -33,18 +25,16 @@
     <div class="col-12 m-0 p-0 d-flex">
       <!-- Sidebar -->
       <div class="side__bar d-flex flex-column">
-        @for (item of pdMenus; track item) {
-          <div
-            class="menu-item list-item border-bottom-one"
+        <ng-container *ngFor="let item of pdMenus;">
+          <div class="menu-item list-item border-bottom-one"
             [class.active-menu]="item.isSelected"
-            (click)="itemSelected(item, true)"
-          >
+            (click)="itemSelected(item, true)" >
             <label class="menu-header w-100 cursor-pointer">
               {{ item.processName }}
             </label>
           </div>
-        }
-        @for (item of menus; track item) {
+        </ng-container>
+        <ng-container *ngFor="let item of menus;">
           <div
             class="menu-item list-item border-bottom-one"
             [class.active-menu]="item.isSelected"
@@ -54,15 +44,14 @@
               {{ item.processName }}
             </label>
           </div>
-        }
+        </ng-container>
       </div>
 
       <!-- Right content -->
       <div class="display-container flex-grow-1 ms-3 p-10">
         <h4 class="text-white-color mb-1 border-bottom-one">File Details:</h4>
 
-        @if (!!selectedProcessName) {
-          <div class="tabs">
+          <div class="tabs" *ngIf="!!selectedProcessName">
             <button
               class="tab-btn"
               [class.active]="selectedTab === 'latest'"
@@ -79,11 +68,10 @@
               History
             </button>
           </div>
-        }
 
         <!-- Table -->
 
-        @if (latestTableData.length || historyTableData.length) {
+        <ng-container *ngIf="latestTableData.length || historyTableData.length">
           <table class="custom-table w-100 mt-2">
             <thead>
               <tr>
@@ -95,17 +83,8 @@
             </thead>
 
             <tbody>
-              @for (
-                group of selectedTab === "latest"
-                  ? latestTableData
-                  : historyTableData;
-                track group.version
-              ) {
-                @for (
-                  file of group.files;
-                  track file.fileName;
-                  let i = $index
-                ) {
+              <ng-container *ngFor="let group of (selectedTab === 'latest' ? latestTableData : historyTableData);">
+                <ng-container *ngFor="let file of group.files; let i = index">
                   <tr>
                     <td class="text-white-color">
                         {{ group.version }}
@@ -139,11 +118,11 @@
                       {{ file.createdDate }}
                     </td>
                   </tr>
-                }
-              }
+                </ng-container>
+              </ng-container>
             </tbody>
           </table>
-        }
+        </ng-container>
       </div>
     </div>
   </div>

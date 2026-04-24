@@ -1,15 +1,12 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { MasterService } from './services/master.service';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   selector: 'lib-file-config-library',
-  standalone: true,
-  imports: [FormsModule, MatProgressBarModule, MatProgressSpinnerModule],
+  standalone: false,
   providers: [MasterService],
+  // template: `<p>library works</p>`,
   templateUrl: `./file-config-library.component.html`,
-  styleUrl: `./file-config-library.component.scss`,
+  styleUrls: [`./file-config-library.component.scss`],
 })
 export class DashboardUiComponent implements OnInit {
   private masterService = inject(MasterService);
