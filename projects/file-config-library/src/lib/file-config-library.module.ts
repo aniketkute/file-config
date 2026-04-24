@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { DashboardUiComponent } from "file-config-library";
+import { DashboardUiComponent } from "./file-config-library.component";
 
 
 @NgModule({
