@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { DashboardUiComponent } from '../../projects/file-config-library/src/public-api';
+import { FileConfigLibraryModule } from '../../projects/file-config-library/src/public-api';
 import { routes } from './app.routes';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { routes } from './app.routes';
     HttpClientModule, // ✅ REQUIRED
     CommonModule,
     RouterOutlet,
-    DashboardUiComponent,
+    FileConfigLibraryModule,
     RouterModule.forRoot(routes)
   ],
   bootstrap: [AppComponent]

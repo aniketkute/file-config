@@ -4,7 +4,6 @@ import { MasterService } from './services/master.service';
   selector: 'lib-file-config-library',
   standalone: false,
   providers: [MasterService],
-  // template: `<p>library works</p>`,
   templateUrl: `./file-config-library.component.html`,
   styleUrls: [`./file-config-library.component.scss`],
 })
