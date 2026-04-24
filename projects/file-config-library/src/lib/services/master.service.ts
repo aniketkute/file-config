@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,17 +6,15 @@ import { inject, Injectable } from '@angular/core';
 })
 export class MasterService {
   readonly http = inject(HttpClient);
-  // private BASE_URL: string = 'https://dev-api.file-service.mobioffice.io';
 
   //#region POST
   getDetailsWithProcess(payload: any, BASE_URL: string) {
     return this.http.post(`${BASE_URL}/getFilesPath/v4`, payload);
   }
+
+  getDetailsWithProcessForPd(number: string, BASE_URL: string) {
+    return this.http.get(`${BASE_URL}/pd/file/getImagev2?number=${number}`);
+  }
   //#endregion
 
-  //#region GET
-  // getProcessList() {
-  //   return this.http.get(`${this.BASE_URL}/pd/v1/FileProcessConfig/getAll`);
-  // }
-  //#endregion
 }

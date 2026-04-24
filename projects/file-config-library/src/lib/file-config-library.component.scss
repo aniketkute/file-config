@@ -207,3 +207,21 @@
     color: var(--text-white-color);
   }
 }
+
+.profile-main-loader {
+  left: 50% !important;
+  position: fixed !important;
+  top: 50% !important;
+  margin-top: -100px;
+  width: 45px;
+  z-index: 90000000 !important;
+}
+
+.mat-progress-bar{
+  height: 2px !important;
+  color: #ab7340 !important;
+}
+
+.text-yellow{
+  color: #ab7340 !important;
+}
