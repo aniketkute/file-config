@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, map, Observable, of, switchMap } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map, switchMap, catchError, finalize } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
