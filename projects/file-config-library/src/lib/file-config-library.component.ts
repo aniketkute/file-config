@@ -1,5 +1,7 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MasterService } from './services/master.service';
+import { finalize } from 'rxjs';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 @Component({
   selector: 'lib-file-config-library',
   standalone: false,
@@ -9,6 +11,9 @@ import { MasterService } from './services/master.service';
 })
 export class DashboardUiComponent implements OnInit {
   private masterService = inject(MasterService);
+  private cd: ChangeDetectorRef = inject(ChangeDetectorRef);
+  private ngZone: NgZone = inject(NgZone);
+  private readonly dialog = inject(MatDialog)
 
   ngOnInit() {
   }
@@ -26,6 +31,8 @@ export class DashboardUiComponent implements OnInit {
   pdMenus: any = [];
   pdDataForDownload: any;
   loader: boolean = false;
+  selectedPreviewImage: string | null = null;
+  @ViewChild('imagePreview') imagePreviewTemplate!: TemplateRef<any>;
 
   itemSelected(item: any, isPDData: boolean = false) {
     this.historyTableData = [];
@@ -148,75 +155,64 @@ export class DashboardUiComponent implements OnInit {
     if(this.loader) return;
 
     this.loader = true;
-    this.selectedProcessName = null;
-    this.latestTableData = [];
-    this.historyTableData = [];
-    const payload = {
-      packetBarCode: this.styleSketchNumber,
-      rootFolderName: 'uploads',
-      isAllVersionNeeded: 1,
-    };
 
-    this.masterService.getDetailsWithProcess(payload, this.BASE_URL).subscribe({
-      next: (res: any) => {
-        this.styleDetailsForDownload = res;
-
-        if (res?.filePaths) {
-          const objectKeys = Object.keys(res.filePaths);
-          this.menus = objectKeys.map((item) => ({
-            processName: item,
-            isSelected: false,
-          }));
-        } else {
-          this.menus = [];
-          this.styleDetailsForDownload = [];
-        }
-
-        this.masterService.getDetailsWithProcessForPd(this.styleSketchNumber!, this.PD_BASE_URL).subscribe({
-          next: (res: any) => {
-            this.pdDataForDownload = res?.data;
-            this.pdMenus = [];
-
-            if(!!this.pdDataForDownload["briefImage"]) {
-              this.pdMenus = [{
-                  processName: "Brief Images",
-                  isSelected: false,
-                },
-              ];
-            }
-
-            if(!!this.pdDataForDownload["subBriefImage"]) {
-              this.pdMenus.push({
-                processName: "Sub Brief Images",
-                isSelected: false,
-              });
-            }
-
-            if(!this.styleDetailsForDownload.filePaths["sketch"] && !!this.pdDataForDownload["sketchImage"]) {
-              this.pdMenus.push({
-                processName: "sketch",
-                isSelected: false,
-              });
-            }
-            this.loader = false;
-          },error: (err) => {
-            this.pdMenus = [];
-            this.pdDataForDownload = [];
-            this.loader = false;
-          },
+    this.masterService.getFullDetails(this.styleSketchNumber!, this.BASE_URL, this.PD_BASE_URL).pipe(
+      finalize(() => {
+        // 🔥 Ensure Angular detects change (Angular 14 safe)
+        this.ngZone.run(() => {
+          this.loader = false;
+          this.cd.detectChanges();
         });
-      },
-      error: (err) => {
-        this.menus = [];
-        this.styleDetailsForDownload = [];
-        this.loader = false;
-      },
+      })
+    )
+    .subscribe((res) => {
+      this.styleDetailsForDownload = res.styleDetails;
+      this.menus = res.menus;
+      this.pdDataForDownload = res.pdData;
+      this.pdMenus = res.pdMenus;
+
+      this.selectedProcessName = null;
+      this.latestTableData = [];
+      this.historyTableData = [];
     });
+
   }
 
   downloadFile(file: any) {
     const encodedUrl = encodeURIComponent(file.url);
     const fullUrl = `${this.BASE_URL}/${encodedUrl}`;
     window.open(fullUrl, '_blank');
+  }
+
+  checkImagePreview(file: any): boolean {
+    if(["Sub Brief Images", "Brief Images", "sketch"].includes(this.selectedProcessName))return true;
+
+    if(['jpeg', 'png', 'gif', 'jpg'].includes(file.fileType)) return true;
+
+    return false;
+  }
+
+  constructImageUrl(file: any): string {
+    if (!file?.url) return '';
+
+    const cleanedPath = file.url.startsWith('/') ? file.url.substring(1) : file.url;
+
+    return `${this.BASE_URL}/${cleanedPath}`;
+  }
+
+  openFullScreenPreview(file: any) {
+    this.selectedPreviewImage = this.constructImageUrl(file);
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '100vw';
+    dialogConfig.maxWidth = '100vw';
+    dialogConfig.height = '100vh';
+    dialogConfig.disableClose = true;
+    dialogConfig.backdropClass = 'custom-dialog-backdrop';
+    this.dialog.open(this.imagePreviewTemplate, dialogConfig);
+  }
+
+  closePopup(){
+    this.dialog.closeAll();
   }
 }

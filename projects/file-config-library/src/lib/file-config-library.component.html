@@ -77,6 +77,7 @@
               <tr>
                 <th class="text-white-color">Version</th>
                 <th class="text-white-color">File Name</th>
+                <th class="text-white-color">Image Preview</th>
                 <th class="text-white-color">File Type</th>
                 <th class="text-white-color">Created Date</th>
               </tr>
@@ -111,6 +112,15 @@
                         </svg>
                       </div>
                     </td>
+                    <td>
+                      <img
+                        *ngIf="checkImagePreview(file)"
+                        [src]="constructImageUrl(file)"
+                        alt="Image Preview"
+                        class="image-preview"
+                        (click)="openFullScreenPreview(file)"
+                      />
+                    </td>
                     <td class="text-white-color">
                       {{ file.fileType }}
                     </td>
@@ -127,3 +137,15 @@
     </div>
   </div>
 </div>
+
+<ng-template #imagePreview>
+  <div class="image-preview-container">
+    <button class="close-btn" (click)="closePopup()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="image-wrapper">
+      <img [src]="selectedPreviewImage" alt="Image Preview" />
+    </div>
+  </div>
+</ng-template>
