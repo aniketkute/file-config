@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { MasterService } from './services/master.service';
 import { finalize } from 'rxjs/operators';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'lib-file-config-library',
