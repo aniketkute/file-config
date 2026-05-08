@@ -5,9 +5,12 @@
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0"
   },
-
   "dependencies": {
+    "@angular/material": "^15.2.9",
     "tslib": "^2.3.0"
   },
+   "allowedNonPeerDependencies": [
+    "@angular/material"
+  ],
   "sideEffects": false
 }

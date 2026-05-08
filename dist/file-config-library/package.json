@@ -1,19 +1,19 @@
 {
   "name": "file-config-library",
-  "version": "0.0.8",
+  "version": "0.0.7",
   "peerDependencies": {
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0"
   },
   "dependencies": {
+    "@angular/material": "^15.2.9",
     "tslib": "^2.3.0"
   },
+  "allowedNonPeerDependencies": [
+    "@angular/material"
+  ],
   "sideEffects": false,
-  "module": "fesm2015/file-config-library.mjs",
-  "es2020": "fesm2020/file-config-library.mjs",
-  "esm2020": "esm2020/file-config-library.mjs",
-  "fesm2020": "fesm2020/file-config-library.mjs",
-  "fesm2015": "fesm2015/file-config-library.mjs",
+  "module": "fesm2022/file-config-library.mjs",
   "typings": "index.d.ts",
   "exports": {
     "./package.json": {
@@ -21,11 +21,9 @@
     },
     ".": {
       "types": "./index.d.ts",
-      "esm2020": "./esm2020/file-config-library.mjs",
-      "es2020": "./fesm2020/file-config-library.mjs",
-      "es2015": "./fesm2015/file-config-library.mjs",
-      "node": "./fesm2015/file-config-library.mjs",
-      "default": "./fesm2020/file-config-library.mjs"
+      "esm2022": "./esm2022/file-config-library.mjs",
+      "esm": "./esm2022/file-config-library.mjs",
+      "default": "./fesm2022/file-config-library.mjs"
     }
   }
 }

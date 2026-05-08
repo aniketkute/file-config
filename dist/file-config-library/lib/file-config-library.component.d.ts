@@ -53,5 +53,5 @@ export declare class DashboardUiComponent implements OnInit {
     openFullScreenPreview(file: any): void;
     closePopup(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<DashboardUiComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<DashboardUiComponent, "lib-file-config-library", never, { "BASE_URL": "BASE_URL"; "PD_BASE_URL": "PD_BASE_URL"; "loaderType": "loaderType"; }, {}, never, never, false>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<DashboardUiComponent, "lib-file-config-library", never, { "BASE_URL": { "alias": "BASE_URL"; "required": false; }; "PD_BASE_URL": { "alias": "PD_BASE_URL"; "required": false; }; "loaderType": { "alias": "loaderType"; "required": false; }; }, {}, never, never, false, never>;
 }
