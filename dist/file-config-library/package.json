@@ -1,17 +1,16 @@
 {
   "name": "file-config-library",
-  "version": "0.0.7",
+  "version": "0.0.21",
   "peerDependencies": {
-    "@angular/common": "^14.0.0",
-    "@angular/core": "^14.0.0"
+    "@angular/animations": "^20.0.0",
+    "@angular/cdk": "^20.0.0",
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0",
+    "@angular/forms": "^20.0.0",
+    "@angular/material": "^20.0.0",
+    "@angular/platform-browser": "^20.0.0",
+    "rxjs": "^7.8.0"
   },
-  "dependencies": {
-    "@angular/material": "^15.2.9",
-    "tslib": "^2.3.0"
-  },
-  "allowedNonPeerDependencies": [
-    "@angular/material"
-  ],
   "sideEffects": false,
   "module": "fesm2022/file-config-library.mjs",
   "typings": "index.d.ts",
@@ -23,5 +22,8 @@
       "types": "./index.d.ts",
       "default": "./fesm2022/file-config-library.mjs"
     }
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
   }
 }
