@@ -1,5 +1,71 @@
-/**
- * Generated bundle index. Do not edit.
- */
-/// <amd-module name="file-config-library" />
-export * from './public-api';
+import * as i0 from '@angular/core';
+import { OnInit, TemplateRef } from '@angular/core';
+import * as i2 from '@angular/forms';
+import * as i3 from '@angular/common';
+import * as i4 from '@angular/material/dialog';
+import * as i5 from '@angular/platform-browser/animations';
+import * as i6 from '@angular/material/icon';
+
+declare class DashboardUiComponent implements OnInit {
+    private masterService;
+    private cd;
+    private ngZone;
+    private readonly dialogRef;
+    ngOnInit(): void;
+    BASE_URL: string;
+    PD_BASE_URL: string;
+    loaderType: string;
+    imagePreviewTemplate: TemplateRef<any>;
+    menus: any;
+    styleSketchNumber: string | null;
+    styleSketchNumberVersion: string | null;
+    selectedProcessName: string | null;
+    styleDetailsForDownload: any;
+    selectedTab: 'latest' | 'history' | 'showAll';
+    tableData: any[];
+    latestTableData: any[];
+    historyTableData: any[];
+    showAllTableData: any[];
+    pdMenus: any;
+    pdDataForDownload: any;
+    loader: boolean;
+    bagNo: string | null;
+    selectedPreviewImage: string | null;
+    refFromEmrGatiDiaVendor: boolean;
+    styleVersionArray: any;
+    afterResultConvertedIntoDisplayFormat: any;
+    versionWiseUrl: any;
+    itemSelected(item: any, isPDData?: boolean): void;
+    private prepareTableData;
+    onTabChange(tab: 'latest' | 'history' | 'showAll'): void;
+    updateTableData(): void;
+    private preparePDTableData;
+    enterPressed(sketchNumber: string): void;
+    getStyleVersionDetails(): void;
+    private getStyleVersionDetailsFromVersion;
+    onFolderSelect(folderName: any): void;
+    getBagWiseDetails(): void;
+    styleVersionSelected(folderName: any): void;
+    removeAllFilledDetails(): void;
+    mapFile(filePath: string): {
+        fileName: string;
+        filePath: string;
+        fileType: string;
+        createdDate: string;
+    };
+    downloadFile(file: any): void;
+    checkImagePreview(file: any): boolean;
+    constructImageUrl(file: any): string;
+    openFullScreenPreview(file: any): void;
+    closePopup(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<DashboardUiComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<DashboardUiComponent, "lib-file-config-library", never, { "BASE_URL": { "alias": "BASE_URL"; "required": false; }; "PD_BASE_URL": { "alias": "PD_BASE_URL"; "required": false; }; "loaderType": { "alias": "loaderType"; "required": false; }; }, {}, never, never, false, never>;
+}
+
+declare class FileConfigLibraryModule {
+    static ɵfac: i0.ɵɵFactoryDeclaration<FileConfigLibraryModule, never>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<FileConfigLibraryModule, [typeof DashboardUiComponent], [typeof i2.FormsModule, typeof i3.CommonModule, typeof i4.MatDialogModule, typeof i5.BrowserAnimationsModule, typeof i6.MatIconModule], [typeof DashboardUiComponent, typeof i4.MatDialogModule]>;
+    static ɵinj: i0.ɵɵInjectorDeclaration<FileConfigLibraryModule>;
+}
+
+export { DashboardUiComponent, FileConfigLibraryModule };

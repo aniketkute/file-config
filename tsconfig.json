@@ -6,7 +6,6 @@
     "paths": {
       "file-config-library": [
         "projects/file-config-library/src/public-api.ts"
-        // "./dist/file-config-library"
       ]
     },
     "outDir": "./dist/out-tsc",
@@ -20,7 +19,7 @@
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2020",
     "module": "ES2020",
