@@ -3,5 +3,9 @@
   "dest": "../../dist/file-config-library",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "allowedNonPeerDependencies": [
+    "@angular/material",
+    "@angular/cdk"
+  ]
 }
