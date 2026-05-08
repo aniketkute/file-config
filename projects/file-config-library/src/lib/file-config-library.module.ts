@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { DashboardUiComponent } from './file-config-library.component';
-import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar';
-import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner';
+// import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar';
+//  import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,8 +12,8 @@ import { MatDialogModule } from '@angular/material/dialog';
   declarations: [DashboardUiComponent],
   imports: [
     FormsModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
+    // MatProgressBarModule,
+    // MatProgressSpinnerModule,
     CommonModule,
     MatDialogModule,
     BrowserAnimationsModule,
