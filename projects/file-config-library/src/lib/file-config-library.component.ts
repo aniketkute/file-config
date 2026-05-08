@@ -23,7 +23,7 @@ export class DashboardUiComponent implements OnInit {
   private masterService = inject(MasterService);
   private cd: ChangeDetectorRef = inject(ChangeDetectorRef);
   private ngZone: NgZone = inject(NgZone);
-  private readonly dialog = inject(MatDialog);
+  private readonly dialogRef = inject(MatDialog);
 
   ngOnInit() {}
 
@@ -433,10 +433,10 @@ export class DashboardUiComponent implements OnInit {
     dialogConfig.height = '100vh';
     dialogConfig.disableClose = true;
     dialogConfig.backdropClass = 'custom-dialog-backdrop';
-    this.dialog.open(this.imagePreviewTemplate, dialogConfig);
+    this.dialogRef.open(this.imagePreviewTemplate, dialogConfig);
   }
 
   closePopup() {
-    this.dialog.closeAll();
+    this.dialogRef.closeAll();
   }
 }
