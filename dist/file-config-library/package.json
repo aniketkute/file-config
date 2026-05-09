@@ -1,13 +1,13 @@
 {
   "name": "file-config-library",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "peerDependencies": {
-    "@angular/common": "^20.0.0",
-    "@angular/core": "^20.0.0",
-    "@angular/material": "^20.0.0"
+    "@angular/common": "20.0.3",
+    "@angular/core": "20.0.3",
+    "@angular/material": "20.0.3"
   },
   "dependencies": {
-    "tslib": "^2.8.1"
+    "tslib": "2.8.1"
   },
   "sideEffects": false,
   "module": "fesm2022/file-config-library.mjs",
