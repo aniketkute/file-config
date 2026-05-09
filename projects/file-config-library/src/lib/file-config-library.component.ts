@@ -8,13 +8,22 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MasterService } from './services/master.service';
 import { finalize } from 'rxjs/operators';
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
 @Component({
   selector: 'lib-file-config-library',
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatIconModule,
+    MatDialogModule,
+  ],
   providers: [MasterService],
   templateUrl: `./file-config-library.component.html`,
   styleUrls: [`./file-config-library.component.scss`],

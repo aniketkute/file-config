@@ -1,25 +1,90 @@
-# DashboardUi
+# file-config-library
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
+An Angular library for browsing and downloading files by ID, style number, or bag number.
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name --project file-config-library` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project file-config-library`.
+```bash
+npm install file-config-library
+```
 
-> Note: Don't forget to add `--project file-config-library` or else it will be added to the default project in your `angular.json` file.
+## Required peer dependencies
+
+Your app must have these installed:
+
+```bash
+npm install @angular/material @angular/cdk @angular/animations
+```
+
+## Consumer app setup (REQUIRED)
+
+The library does **not** import `BrowserAnimationsModule` — you must add it in your root `AppModule`. Skipping this will break Angular Material components (dialogs, icons) and cause routing issues.
+
+### NgModule-based app
+
+```ts
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { FileConfigLibraryModule } from 'file-config-library';
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule, // ✅ required
+    FileConfigLibraryModule,
+  ],
+  providers: [
+    provideHttpClient(withInterceptorsFromDi()), // ✅ required for HTTP calls
+  ],
+})
+export class AppModule {}
+```
+
+### Standalone app (bootstrapApplication)
+
+```ts
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideHttpClient } from '@angular/common/http';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideAnimations(), // ✅ required
+    provideHttpClient(),
+  ],
+});
+```
+
+## Usage
+
+Add the component in your template:
+
+```html
+<lib-file-config-library
+  [BASE_URL]="'https://your-file-api.example.com'"
+  [PD_BASE_URL]="'https://your-pd-api.example.com'"
+  [loaderType]="'bar'"
+>
+</lib-file-config-library>
+```
+
+### Inputs
+
+| Input | Type | Default | Description |
+|---|---|---|---|
+| `BASE_URL` | `string` | `https://dev-api.file-service.mobioffice.io` | File service API base URL |
+| `PD_BASE_URL` | `string` | `https://dev-api.jewelnext.mobioffice.io` | PD service API base URL |
+| `loaderType` | `'bar' \| 'circle'` | `'bar'` | Loader style while fetching |
 
 ## Build
 
-Run `ng build file-config-library` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+ng build file-config-library
+```
 
 ## Publishing
 
-After building your library with `ng build file-config-library`, go to the dist folder `cd dist/file-config-library` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test file-config-library` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+cd dist/file-config-library
+npm publish
+```

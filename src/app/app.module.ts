@@ -13,8 +13,8 @@ import { routes } from './app.routes';
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule, // ✅ animations provided here at app level, not in library
-    FileConfigLibraryModule,
+    BrowserAnimationsModule,
+    FileConfigLibraryModule, // wraps the standalone component for NgModule compat
     RouterModule.forRoot(routes),
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],

@@ -3,8 +3,7 @@ import { OnInit, TemplateRef } from '@angular/core';
 import * as i2 from '@angular/forms';
 import * as i3 from '@angular/common';
 import * as i4 from '@angular/material/dialog';
-import * as i5 from '@angular/platform-browser/animations';
-import * as i6 from '@angular/material/icon';
+import * as i5 from '@angular/material/icon';
 
 declare class DashboardUiComponent implements OnInit {
     private masterService;
@@ -64,7 +63,7 @@ declare class DashboardUiComponent implements OnInit {
 
 declare class FileConfigLibraryModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<FileConfigLibraryModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<FileConfigLibraryModule, [typeof DashboardUiComponent], [typeof i2.FormsModule, typeof i3.CommonModule, typeof i4.MatDialogModule, typeof i5.BrowserAnimationsModule, typeof i6.MatIconModule], [typeof DashboardUiComponent, typeof i4.MatDialogModule]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<FileConfigLibraryModule, [typeof DashboardUiComponent], [typeof i2.FormsModule, typeof i3.CommonModule, typeof i4.MatDialogModule, typeof i5.MatIconModule], [typeof DashboardUiComponent, typeof i4.MatDialogModule]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<FileConfigLibraryModule>;
 }
 
