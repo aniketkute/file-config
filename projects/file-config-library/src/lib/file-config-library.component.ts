@@ -11,19 +11,18 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule, MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialog,
+  MatDialogConfig,
+} from '@angular/material/dialog';
 import { MasterService } from './services/master.service';
 import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'lib-file-config-library',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatIconModule,
-    MatDialogModule,
-  ],
+  imports: [CommonModule, FormsModule, MatIconModule, MatDialogModule],
   providers: [MasterService],
   templateUrl: `./file-config-library.component.html`,
   styleUrls: [`./file-config-library.component.scss`],
@@ -140,9 +139,7 @@ export class DashboardUiComponent implements OnInit {
     }
 
     this.showAllTableData = [...this.latestTableData, ...this.historyTableData];
-    console.log('Latest:', this.latestTableData);
-    console.log('History:', this.historyTableData);
-    console.log('Show All:', this.showAllTableData);
+    this.onTabChange('latest');
   }
 
   onTabChange(tab: 'latest' | 'history' | 'showAll') {

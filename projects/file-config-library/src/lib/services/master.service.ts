@@ -8,7 +8,7 @@ import { map, switchMap, catchError, finalize } from 'rxjs/operators';
 })
 export class MasterService {
   readonly http = inject(HttpClient);
-  BASE_URL1 = 'http://192.168.54.189:4000';
+  // BASE_URL1 = 'http://192.168.54.189:4000'; server URL for testing
 
   //#region POST
   getDetailsWithProcess(payload: any, BASE_URL: string) {

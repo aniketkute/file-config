@@ -1,9 +1,5 @@
 import * as i0 from '@angular/core';
 import { OnInit, TemplateRef } from '@angular/core';
-import * as i2 from '@angular/forms';
-import * as i3 from '@angular/common';
-import * as i4 from '@angular/material/dialog';
-import * as i5 from '@angular/material/icon';
 
 declare class DashboardUiComponent implements OnInit {
     private masterService;
@@ -58,12 +54,12 @@ declare class DashboardUiComponent implements OnInit {
     openFullScreenPreview(file: any): void;
     closePopup(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<DashboardUiComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<DashboardUiComponent, "lib-file-config-library", never, { "BASE_URL": { "alias": "BASE_URL"; "required": false; }; "PD_BASE_URL": { "alias": "PD_BASE_URL"; "required": false; }; "loaderType": { "alias": "loaderType"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<DashboardUiComponent, "lib-file-config-library", never, { "BASE_URL": { "alias": "BASE_URL"; "required": false; }; "PD_BASE_URL": { "alias": "PD_BASE_URL"; "required": false; }; "loaderType": { "alias": "loaderType"; "required": false; }; }, {}, never, never, true, never>;
 }
 
 declare class FileConfigLibraryModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<FileConfigLibraryModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<FileConfigLibraryModule, [typeof DashboardUiComponent], [typeof i2.FormsModule, typeof i3.CommonModule, typeof i4.MatDialogModule, typeof i5.MatIconModule], [typeof DashboardUiComponent, typeof i4.MatDialogModule]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<FileConfigLibraryModule, never, [typeof DashboardUiComponent], [typeof DashboardUiComponent]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<FileConfigLibraryModule>;
 }
 
