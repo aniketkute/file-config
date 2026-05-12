@@ -22,6 +22,7 @@
   overflow-x: hidden;
   max-width: 100%;
   box-sizing: border-box;
+  height: 100vh;        // anchor the flex chain from the very top
 }
 
 // ─── Loading bar ─────────────────────────────────────────────────────────────
