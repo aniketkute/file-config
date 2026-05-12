@@ -58,6 +58,9 @@ export class DashboardUiComponent implements OnInit {
   styleVersionArray: any = [];
   afterResultConvertedIntoDisplayFormat: any;
   versionWiseUrl: any = [];
+  selectedVersionFilter: string = 'all';
+  versionDropdownOpen: boolean = false;
+  versionSearchQuery: string = '';
 
   itemSelected(item: any, isPDData: boolean = false) {
     this.historyTableData = [];
@@ -144,6 +147,7 @@ export class DashboardUiComponent implements OnInit {
 
   onTabChange(tab: 'latest' | 'history' | 'showAll') {
     this.selectedTab = tab;
+    this.selectedVersionFilter = 'all';
     this.updateTableData();
   }
 
@@ -324,6 +328,7 @@ export class DashboardUiComponent implements OnInit {
     this.selectedProcessName = folderName.processName;
     this.pdMenus.map((item: any) => (item.isSelected = false));
     folderName.isSelected = true;
+    this.versionSearchQuery = ''; // reset search on folder change
 
     const folderData =
       this.afterResultConvertedIntoDisplayFormat[this.selectedProcessName] ||
@@ -376,6 +381,44 @@ export class DashboardUiComponent implements OnInit {
     );
   }
 
+  /** Unique version list derived from current tableData for the filter dropdown */
+  get availableVersions(): string[] {
+    const versions = this.tableData
+      .map((g) => g.version)
+      .filter((v) => !!v);
+    return [...new Set(versions)];
+  }
+
+  /** tableData filtered by the selected version (or all) */
+  get filteredTableData(): any[] {
+    if (this.selectedVersionFilter === 'all') return this.tableData;
+    return this.tableData.filter(
+      (g) => g.version === this.selectedVersionFilter,
+    );
+  }
+
+  /** styleVersionArray filtered by the search query */
+  get filteredStyleVersionArray(): any[] {
+    const q = this.versionSearchQuery.trim().toLowerCase();
+    if (!q) return this.styleVersionArray;
+    return this.styleVersionArray.filter((item: any) =>
+      item.processName?.toLowerCase().includes(q),
+    );
+  }
+
+  setVersionFilter(version: string) {
+    this.selectedVersionFilter = version;
+  }
+
+  /** Highlight matched text in search results */
+  highlightMatch(text: string, query: string): string {
+    if (!query || !text) return text;
+    const q = query.trim();
+    if (!q) return text;
+    const regex = new RegExp(`(${q})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  }
+
   removeAllFilledDetails() {
     this.tableData = [];
     this.versionWiseUrl = [];
@@ -386,6 +429,8 @@ export class DashboardUiComponent implements OnInit {
     this.latestTableData = [];
     this.historyTableData = [];
     this.showAllTableData = [];
+    this.selectedVersionFilter = 'all';
+    this.versionSearchQuery = '';
   }
 
   mapFile(filePath: string) {
