@@ -1,305 +1,342 @@
-<div id="wrapper" *ngIf="!!loader">
-  <div class="profile-main-loader" *ngIf="loaderType === 'circle'">
-    <div class="loader spinner-container">
-      <div class="spinner-border text-yellow" role="status"></div>
-    </div>
-  </div>
-  <div
-    style="position: absolute; top: 0px"
-    class="w-100"
-    *ngIf="loaderType === 'bar'"
-  >
-    <!-- <mat-progress-bar
-      color="primary"
-      mode="indeterminate"
-      class="mat-progress-bar"
-    >
-    </mat-progress-bar> -->
-  </div>
+<!-- Loading bar -->
+<div class="progress-bar-wrapper" *ngIf="!!loader">
+  <div class="progress-bar-fill"></div>
 </div>
 
-<div class="dashboard-component p-0 m-0">
-  <div class="row p-10">
-    <div class="col-3 d-flex flex-column">
-      <label class="form-group-label text-white-color mb-1">Enter ID</label>
-      <input
-        type="text"
-        class="form-control input-background-color text-white-color"
-        placeholder="Enter ID"
-        [(ngModel)]="styleSketchNumber"
-        (input)="removeAllFilledDetails()"
-        (keydown.enter)="enterPressed(styleSketchNumber)"
-      />
+<!-- Spinner overlay -->
+<div class="spinner-overlay" *ngIf="!!loader && loaderType === 'circle'">
+  <div class="spinner-ring"></div>
+</div>
+
+<div class="dashboard-component">
+
+  <!-- Search Panel -->
+  <div class="search-panel">
+    <div class="search-field">
+      <label class="field-label">Enter ID</label>
+      <div class="input-wrapper">
+        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
+          <path fill="currentColor" d="M10 2a8 8 0 1 0 4.906 14.32l4.387 4.387 1.414-1.414-4.387-4.387A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12A6 6 0 0 1 10 4Z"/>
+        </svg>
+        <input
+          type="text"
+          class="field-input"
+          placeholder="Style / Sketch No."
+          [(ngModel)]="styleSketchNumber"
+          (input)="removeAllFilledDetails()"
+          (keydown.enter)="enterPressed(styleSketchNumber)"
+        />
+      </div>
     </div>
-    <div class="col-3 d-flex flex-column">
-      <label class="form-group-label text-white-color mb-1">Enter Style</label>
-      <input
-        type="text"
-        class="form-control input-background-color text-white-color"
-        placeholder="Enter Style"
-        [(ngModel)]="styleSketchNumberVersion"
-        (input)="removeAllFilledDetails()"
-        (keydown.enter)="getStyleVersionDetails()"
-      />
+
+    <div class="search-field">
+      <label class="field-label">Enter Style</label>
+      <div class="input-wrapper">
+        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
+          <path fill="currentColor" d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+        </svg>
+        <input
+          type="text"
+          class="field-input"
+          placeholder="Style version"
+          [(ngModel)]="styleSketchNumberVersion"
+          (input)="removeAllFilledDetails()"
+          (keydown.enter)="getStyleVersionDetails()"
+        />
+      </div>
     </div>
-    <div class="col-3 d-flex flex-column">
-      <label class="form-group-label text-white-color mb-1">Enter Bag No</label>
-      <input
-        type="text"
-        class="form-control input-background-color text-white-color"
-        placeholder="Enter Bag No"
-        [(ngModel)]="bagNo"
-        (input)="removeAllFilledDetails()"
-        (keydown.enter)="getBagWiseDetails()"
-      />
+
+    <div class="search-field">
+      <label class="field-label">Enter Bag No</label>
+      <div class="input-wrapper">
+        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
+          <path fill="currentColor" d="M19 6h-2a5 5 0 0 0-10 0H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Zm-7-3a3 3 0 0 1 3 3H9a3 3 0 0 1 3-3Zm7 17H5V8h14v12Z"/>
+        </svg>
+        <input
+          type="text"
+          class="field-input"
+          placeholder="Bag number"
+          [(ngModel)]="bagNo"
+          (input)="removeAllFilledDetails()"
+          (keydown.enter)="getBagWiseDetails()"
+        />
+      </div>
     </div>
-    <div class="col-3">
-      <label class="text-white-color">
+
+    <div class="search-field toggle-field">
+      <label class="field-label">Options</label>
+      <label class="toggle-pill">
         <input type="checkbox" [(ngModel)]="refFromEmrGatiDiaVendor" />
-        Ref Style No
+        <span class="toggle-track">
+          <span class="toggle-thumb"></span>
+        </span>
+        <span class="toggle-label">Ref Style No</span>
       </label>
     </div>
   </div>
 
-  <div class="row m-0 p-0 master-container">
-    <!-- @if (!styleSketchNumberVersion) { -->
-    <div *ngIf="!styleSketchNumberVersion" class="col-12 m-0 p-0 d-flex">
-      <!--Sidebar -->
-      <div class="side__bar d-flex flex-column">
-        <ng-container *ngFor="let item of pdMenus">
-          <div
-            class="menu-item list-item border-bottom-one"
-            [class.active-menu]="item.isSelected"
-            (click)="itemSelected(item, true)"
-          >
-            <label class="menu-header w-100 cursor-pointer">
-              {{ item.processName }}
-            </label>
+  <!-- Main layout -->
+  <div class="master-container">
+
+    <!-- ── View: ID / Bag mode ── -->
+    <ng-container *ngIf="!styleSketchNumberVersion">
+      <div class="layout-row">
+
+        <!-- Sidebar -->
+        <aside class="side__bar">
+          <div class="sidebar-section-label" *ngIf="pdMenus.length">PD Files</div>
+          <ng-container *ngFor="let item of pdMenus">
+            <div
+              class="menu-item"
+              [class.active-menu]="item.isSelected"
+              (click)="itemSelected(item, true)"
+            >
+              <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
+                <path fill="currentColor" d="M20 6h-8l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z"/>
+              </svg>
+              <span class="menu-label">{{ item.processName }}</span>
+            </div>
+          </ng-container>
+
+          <div class="sidebar-section-label" *ngIf="menus.length">Style Files</div>
+          <ng-container *ngFor="let item of menus">
+            <div
+              class="menu-item"
+              [class.active-menu]="item.isSelected"
+              (click)="itemSelected(item)"
+            >
+              <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
+                <path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm4 18H6V4h7v5h5v11Z"/>
+              </svg>
+              <span class="menu-label">{{ item.processName }}</span>
+            </div>
+          </ng-container>
+
+          <!-- Empty sidebar state -->
+          <div class="sidebar-empty" *ngIf="!pdMenus.length && !menus.length">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28">
+              <path fill="currentColor" d="M20 6h-8l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z" opacity=".3"/>
+            </svg>
+            <span>No data yet</span>
           </div>
-        </ng-container>
-        <ng-container *ngFor="let item of menus">
-          <div
-            class="menu-item list-item border-bottom-one"
-            [class.active-menu]="item.isSelected"
-            (click)="itemSelected(item)"
-          >
-            <label class="menu-header w-100 cursor-pointer">
-              {{ item.processName }}
-            </label>
+        </aside>
+
+        <!-- Content area -->
+        <div class="content-area">
+          <div class="section-header">
+            <span class="section-title">File Details</span>
+            <span class="section-badge" *ngIf="selectedProcessName">{{ selectedProcessName }}</span>
           </div>
-        </ng-container>
-      </div>
 
-      <!--Right content-->
-      <div class="display-container flex-grow-1 ms-3 p-10">
-        <h4 class="text-white-color mb-1 border-bottom-one">File Details:</h4>
+          <!-- Tabs -->
+          <div class="tabs" *ngIf="!!selectedProcessName">
+            <button class="tab-btn" [class.active]="selectedTab === 'latest'" (click)="onTabChange('latest')">
+              Latest
+            </button>
+            <button class="tab-btn" [class.active]="selectedTab === 'history'" (click)="onTabChange('history')">
+              History
+            </button>
+            <button class="tab-btn" [class.active]="selectedTab === 'showAll'" (click)="onTabChange('showAll')">
+              Show All
+            </button>
+          </div>
 
-        <div class="tabs" *ngIf="!!selectedProcessName">
-          <button
-            class="tab-btn"
-            [class.active]="selectedTab === 'latest'"
-            (click)="onTabChange('latest')"
-          >
-            Latest
-          </button>
+          <!-- Table -->
+          <ng-container *ngIf="latestTableData.length || historyTableData.length || showAllTableData.length; else emptyContent">
+            <div class="table-wrapper">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Version</th>
+                    <th>File Name</th>
+                    <th>Preview</th>
+                    <th>Type</th>
+                    <th>Created Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let group of tableData">
+                    <tr *ngFor="let file of group.files; let i = index" class="table-row">
+                      <td *ngIf="i === 0" [attr.rowspan]="group.files.length" class="version-cell">
+                        <span class="version-badge">{{ group.version }}</span>
+                      </td>
+                      <td>
+                        <div class="file-cell">
+                          <span class="file-name">{{ file.fileName }}</span>
+                          <button class="download-btn" (click)="downloadFile(file)" title="Download">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15">
+                              <path fill="currentColor" d="M5 20h14v-2H5v2Zm7-18v10.17l3.59-3.58L17 10l-5 5-5-5 1.41-1.41L11 12.17V2h1Z"/>
+                            </svg>
+                          </button>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="thumb-wrapper" *ngIf="checkImagePreview(file); else noPreview">
+                          <img
+                            [src]="constructImageUrl(file)"
+                            class="image-thumb"
+                            (click)="openFullScreenPreview(file)"
+                          />
+                          <div class="thumb-overlay" (click)="openFullScreenPreview(file)">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                              <path fill="#fff" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z"/>
+                            </svg>
+                          </div>
+                        </div>
+                        <ng-template #noPreview>
+                          <span class="no-preview">—</span>
+                        </ng-template>
+                      </td>
+                      <td>
+                        <span class="type-badge" [attr.data-type]="file.fileType">{{ file.fileType }}</span>
+                      </td>
+                      <td class="date-cell">{{ file.createdDate || '—' }}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </ng-container>
 
-          <button
-            class="tab-btn"
-            [class.active]="selectedTab === 'history'"
-            (click)="onTabChange('history')"
-          >
-            History
-          </button>
-          <button
-            class="tab-btn"
-            [class.active]="selectedTab === 'showAll'"
-            (click)="onTabChange('showAll')"
-          >
-            Show All
-          </button>
+          <!-- Empty content state -->
+          <ng-template #emptyContent>
+            <div class="empty-state">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">
+                <path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm4 18H6V4h7v5h5v11Z" opacity=".4"/>
+              </svg>
+              <p>Select a process from the sidebar to view files</p>
+            </div>
+          </ng-template>
         </div>
 
-        <!--Table-->
+      </div>
+    </ng-container>
 
-        <ng-container
-          *ngIf="
-            latestTableData.length ||
-            historyTableData.length ||
-            showAllTableData.length
-          "
-        >
-          <table class="custom-table w-100 mt-2">
-            <thead>
-              <tr>
-                <th class="text-white-color">Version</th>
-                <th class="text-white-color">File Name</th>
-                <th class="text-white-color">Image Preview</th>
-                <th class="text-white-color">File Type</th>
-                <th class="text-white-color">Created Date</th>
-              </tr>
-            </thead>
+    <!-- ── View: Style version mode ── -->
+    <ng-container *ngIf="styleSketchNumberVersion">
+      <div class="layout-row">
 
-            <tbody>
-              <ng-container *ngFor="let group of tableData">
-                <tr *ngFor="let file of group.files; let i = index">
-                  <!--✅ Show version only once-->
-                  <td
-                    class="text-white-color"
-                    *ngIf="i === 0"
-                    [attr.rowspan]="group.files.length"
-                  >
-                    {{ group.version }}
-                  </td>
+        <!-- Folder sidebar -->
+        <aside class="side__bar">
+          <div class="sidebar-section-label" *ngIf="pdMenus.length">Folders</div>
+          <ng-container *ngFor="let item of pdMenus">
+            <div
+              class="menu-item"
+              [class.active-menu]="item.isSelected"
+              (click)="onFolderSelect(item)"
+            >
+              <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
+                <path fill="currentColor" d="M20 6h-8l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z"/>
+              </svg>
+              <span class="menu-label">{{ item.processName }}</span>
+            </div>
+          </ng-container>
+          <div class="sidebar-empty" *ngIf="!pdMenus.length">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28">
+              <path fill="currentColor" d="M20 6h-8l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z" opacity=".3"/>
+            </svg>
+            <span>No folders</span>
+          </div>
+        </aside>
 
-                  <td>
-                    <div class="file-cell">
-                      <span class="file-name text-white-color">
-                        {{ file.fileName }}
-                      </span>
+        <!-- Version sidebar -->
+        <aside class="side__bar">
+          <div class="sidebar-section-label" *ngIf="styleVersionArray.length">Versions</div>
+          <ng-container *ngFor="let item of styleVersionArray">
+            <div
+              class="menu-item"
+              [class.active-menu]="item.isSelected"
+              (click)="styleVersionSelected(item)"
+            >
+              <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
+                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8Zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7Z"/>
+              </svg>
+              <span class="menu-label">{{ item.processName }}</span>
+            </div>
+          </ng-container>
+          <div class="sidebar-empty" *ngIf="!styleVersionArray.length">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28">
+              <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z" opacity=".3"/>
+            </svg>
+            <span>No versions</span>
+          </div>
+        </aside>
 
-                      <svg
-                        class="download-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        width="16"
-                        height="16"
-                        (click)="downloadFile(file)"
-                        title="Download"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M5 20h14v-2H5v2Zm7-18v10.17l3.59-3.58L17 10l-5 5-5-5 1.41-1.41L11 12.17V2h1Z"
+        <!-- Content area -->
+        <div class="content-area">
+          <div class="section-header">
+            <span class="section-title">File Details</span>
+            <span class="section-badge" *ngIf="selectedProcessName">{{ selectedProcessName }}</span>
+          </div>
+
+          <ng-container *ngIf="versionWiseUrl.length; else emptyVersionContent">
+            <div class="table-wrapper">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>File Name</th>
+                    <th>Preview</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let file of versionWiseUrl" class="table-row">
+                    <td class="index-cell">{{ file.index }}</td>
+                    <td>
+                      <div class="file-cell">
+                        <span class="file-name">{{ file.name }}</span>
+                        <button class="download-btn" (click)="downloadFile(file)" title="Download">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15">
+                            <path fill="currentColor" d="M5 20h14v-2H5v2Zm7-18v10.17l3.59-3.58L17 10l-5 5-5-5 1.41-1.41L11 12.17V2h1Z"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="thumb-wrapper" *ngIf="checkImagePreview(file); else noPreview2">
+                        <img
+                          [src]="constructImageUrl(file)"
+                          class="image-thumb"
+                          (click)="openFullScreenPreview(file)"
                         />
-                      </svg>
-                    </div>
-                  </td>
+                        <div class="thumb-overlay" (click)="openFullScreenPreview(file)">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                            <path fill="#fff" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z"/>
+                          </svg>
+                        </div>
+                      </div>
+                      <ng-template #noPreview2>
+                        <span class="no-preview">—</span>
+                      </ng-template>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-container>
 
-                  <td>
-                    <img
-                      *ngIf="checkImagePreview(file)"
-                      [src]="constructImageUrl(file)"
-                      class="image-preview"
-                      (click)="openFullScreenPreview(file)"
-                    />
-                  </td>
+          <ng-template #emptyVersionContent>
+            <div class="empty-state">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">
+                <path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm4 18H6V4h7v5h5v11Z" opacity=".4"/>
+              </svg>
+              <p>Select a folder and version to view files</p>
+            </div>
+          </ng-template>
+        </div>
 
-                  <td class="text-white-color">
-                    {{ file.fileType }}
-                  </td>
-
-                  <td class="text-white-color">
-                    {{ file.createdDate }}
-                  </td>
-                </tr>
-              </ng-container>
-            </tbody>
-          </table>
-        </ng-container>
       </div>
-    </div>
-    <!-- } -->
+    </ng-container>
 
-    <!-- @if (!!styleSketchNumberVersion) { -->
-    <div *ngIf="styleSketchNumberVersion" class="col-12 m-0 p-0 d-flex">
-      <!-- Sidebar -->
-      test
-      <div class="side__bar d-flex flex-column">
-        <ng-container *ngFor="let item of pdMenus">
-          <div
-            class="menu-item list-item border-bottom-one"
-            [class.active-menu]="item.isSelected"
-            (click)="onFolderSelect(item)"
-          >
-            <label class="menu-header w-100 cursor-pointer">
-              {{ item.processName }}
-            </label>
-          </div>
-        </ng-container>
-      </div>
-
-      <div class="side__bar d-flex flex-column">
-        <ng-container *ngFor="let item of styleVersionArray">
-          <div
-            class="menu-item list-item border-bottom-one"
-            [class.active-menu]="item.isSelected"
-            (click)="styleVersionSelected(item)"
-          >
-            <label class="menu-header w-100 cursor-pointer">
-              {{ item.processName }}
-            </label>
-          </div>
-        </ng-container>
-      </div>
-      <!--- Right content -->
-      <div class="display-container flex-grow-1 ms-3 p-10">
-        <h4 class="text-white-color mb-1 border-bottom-one">File Details:</h4>
-
-        <!--Table -->
-
-        <ng-container *ngIf="versionWiseUrl.length">
-          <table class="custom-table w-100 mt-2">
-            <thead>
-              <tr>
-                <th class="text-white-color">Index</th>
-                <th class="text-white-color">File Name</th>
-                <th>Preview</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr *ngFor="let file of versionWiseUrl; let i = index">
-                <!--✅ Show version only once -->
-                <td class="text-white-color">
-                  {{ file.index }}
-                </td>
-
-                <td>
-                  <div class="file-cell">
-                    <span class="file-name text-white-color">
-                      {{ file.name }}
-                    </span>
-
-                    <svg
-                      class="download-icon"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      width="16"
-                      height="16"
-                      (click)="downloadFile(file)"
-                      title="Download"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M5 20h14v-2H5v2Zm7-18v10.17l3.59-3.58L17 10l-5 5-5-5 1.41-1.41L11 12.17V2h1Z"
-                      />
-                    </svg>
-                  </div>
-                </td>
-
-                <td>
-                  <img
-                    *ngIf="checkImagePreview(file)"
-                    [src]="constructImageUrl(file)"
-                    class="image-preview"
-                    (click)="openFullScreenPreview(file)"
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </ng-container>
-      </div>
-    </div>
-    <!-- } -->
   </div>
 </div>
 
+<!-- Full-screen image preview dialog -->
 <ng-template #imagePreview>
   <div class="image-preview-container">
     <button class="close-btn" (click)="closePopup()">
       <mat-icon>close</mat-icon>
     </button>
-
     <div class="image-wrapper">
       <img [src]="selectedPreviewImage" alt="Image Preview" />
     </div>
