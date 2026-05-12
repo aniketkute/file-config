@@ -1,6 +1,6 @@
 {
   "name": "file-config-library",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "peerDependencies": {
     "@angular/common": "20.0.3",
     "@angular/core": "20.0.3",
