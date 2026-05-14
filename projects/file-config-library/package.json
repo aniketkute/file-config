@@ -1,6 +1,6 @@
 {
-  "name": "file-config-library",
-  "version": "0.0.24",
+  "name": "mobioffice-file-config-library",
+  "version": "0.0.25",
   "peerDependencies": {
     "@angular/common": "20.0.3",
     "@angular/core": "20.0.3",
