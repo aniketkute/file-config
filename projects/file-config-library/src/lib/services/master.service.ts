@@ -52,7 +52,7 @@ export class MasterService {
             const pdData = pdRes?.data || {};
             const pdMenus: any[] = [];
 
-            if (pdData['briefImage']) {
+            if (pdData['briefImage'].length) {
               pdMenus.push({ processName: 'Brief Images', isSelected: false });
             }
 
@@ -105,5 +105,9 @@ export class MasterService {
     return this.http.get(
       `${MFG_BASE_URL}/asset/v1/bag/getStyleVersionByBagNo?bagNo=${bagNo}`,
     );
+  }
+
+  getFileConfigRoleMapping(MFG_BASE_URL: string) {
+    return this.http.get(`${MFG_BASE_URL}/asset/v1/linkUserFileConfig/getAll`);
   }
 }
