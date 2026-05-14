@@ -33,11 +33,12 @@ export class DashboardUiComponent implements OnInit {
   private ngZone: NgZone = inject(NgZone);
   private readonly dialogRef = inject(MatDialog);
 
-  ngOnInit() {}
+  ngOnInit() { this.onInit(); }
 
   @Input() BASE_URL: string = 'https://dev-api.file-service.mobioffice.io';
   @Input() PD_BASE_URL: string = 'https://dev-api.jewelnext.mobioffice.io';
   @Input() loaderType: string = 'bar';
+  @Input() USER_ROLES_ARRAY: string[] = ['Grainding', 'SKETCH'];
   @ViewChild('imagePreview') imagePreviewTemplate!: TemplateRef<any>;
   menus: any = [];
   styleSketchNumber: string | null = null;
@@ -61,6 +62,15 @@ export class DashboardUiComponent implements OnInit {
   selectedVersionFilter: string = 'all';
   versionDropdownOpen: boolean = false;
   versionSearchQuery: string = '';
+  rolesAndFileConfigMaster: any = [];
+
+  private onInit() {
+
+    this.masterService.getFileConfigRoleMapping(this.PD_BASE_URL).subscribe((res: any) => {
+      this.rolesAndFileConfigMaster = res.data;
+    })
+  }
+
 
   itemSelected(item: any, isPDData: boolean = false) {
     this.historyTableData = [];
@@ -243,16 +253,37 @@ export class DashboardUiComponent implements OnInit {
         }),
       )
       .subscribe((res) => {
-        console.log(res);
         this.styleDetailsForDownload = res.styleDetails;
         this.menus = res.menus;
         this.pdDataForDownload = res.pdData;
-        this.pdMenus = res.pdMenus;
+
+        this.validatePdMenus(res.pdMenus);
 
         this.selectedProcessName = null;
         this.latestTableData = [];
         this.historyTableData = [];
       });
+  }
+
+  private validatePdMenus(menus: any) {
+    // Step 1: Convert user roles to lowercase for case-insensitive matching
+    const userRolesLower = this.USER_ROLES_ARRAY.map(role => role.toLowerCase());
+
+    // Step 2: Find matching folderShortCode values and make them unique
+    const allowedProcesses = [
+      ...new Set(
+        this.rolesAndFileConfigMaster
+          .filter(item => userRolesLower.includes(item.role.toLowerCase()))
+          .map(item => item.folderShortCode.toLowerCase())
+      )
+    ];
+
+    // Step 3: Filter menus based on allowed process names
+    const filteredMenus = menus.filter(menu =>
+      allowedProcesses.includes(menu.processName.toLowerCase())
+    );
+
+    this.pdMenus = filteredMenus;
   }
 
   getStyleVersionDetails() {
@@ -272,7 +303,6 @@ export class DashboardUiComponent implements OnInit {
         }),
       )
       .subscribe((res: any) => {
-        console.log(res);
         if (res.data) {
           const styleVersion = res.data.map((item: any) => {
             return item.name;
@@ -285,7 +315,6 @@ export class DashboardUiComponent implements OnInit {
   }
 
   private getStyleVersionDetailsFromVersion(data: any) {
-    console.log(data);
     const DATA = {
       packetBarcodes: data,
       rootFolderName: 'uploads',
@@ -294,8 +323,6 @@ export class DashboardUiComponent implements OnInit {
     this.masterService
       .getDetailsFromVersion(DATA, this.BASE_URL)
       .subscribe((res: any) => {
-        console.log(res);
-
         const result = res.reduce((acc: any, item: any) => {
           const barcode = item.barcode;
 
@@ -317,10 +344,12 @@ export class DashboardUiComponent implements OnInit {
         }, {});
 
         this.afterResultConvertedIntoDisplayFormat = result;
-        this.pdMenus = Object.keys(result).map((key) => ({
+        const pdMenus = Object.keys(result).map((key) => ({
           processName: key,
           isSelected: false,
         }));
+
+        this.validatePdMenus(pdMenus)
       });
   }
 
@@ -347,8 +376,6 @@ export class DashboardUiComponent implements OnInit {
     this.masterService
       .getSyleVersionFromBag(this.PD_BASE_URL, this.bagNo)
       .subscribe((res: any) => {
-        console.log(res);
-
         if (res.data) {
           this.enterPressed(res.data);
         }
@@ -360,26 +387,58 @@ export class DashboardUiComponent implements OnInit {
     this.styleVersionArray.map((item: any) => (item.isSelected = false));
     folderName.isSelected = true;
 
-    console.log(this.styleVersionArray);
-    console.log(this.afterResultConvertedIntoDisplayFormat);
-    // const folderData = this.styleVersionArray[this.selectedProcessName] || {};
 
     const folderData = this.styleVersionArray.find(
       (item: any) => item.processName === selectedProcessName,
     );
-    console.log(folderData?.documentDetails);
-    this.versionWiseUrl = folderData?.documentDetails.map(
-      (url: string, index: number) => {
-        const name = url.split('/').pop(); // last part
+    // this.versionWiseUrl = folderData?.documentDetails.map(
+    //   (url: string, index: number) => {
+    //     const name = url.split('/').pop(); // last part
 
-        return {
-          index: index + 1,
-          name,
-          url,
-        };
-      },
+    //     return {
+    //       index: index + 1,
+    //       name,
+    //       url,
+    //     };
+    //   },
+    // );
+
+    // Sort by createdDate in descending order (latest first)
+    const sortedFiles = [...folderData?.documentDetails].sort(
+      (a, b) =>
+        new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
     );
+
+    // Common mapper
+    const mapFiles = (files: any[]) =>
+      files.map((file, index) => ({
+        index: index + 1,
+        name: file.url.split('/').pop(),      // File name
+        version: `V${file.version}`,          // Prefix version with V
+        url: file.url,                        // Used for preview
+        preview: file.url                     // Optional alias for preview column
+      }));
+
+    // 1. Latest section (only most recently uploaded file)
+    this.latestTableData = sortedFiles.length
+      ? mapFiles([sortedFiles[0]])
+      : [];
+
+    // 2. History section (all files except latest)
+    this.historyTableData = sortedFiles.length > 1
+      ? mapFiles(sortedFiles.slice(1))
+      : [];
+
+    // 3. All section (all files)
+    this.showAllTableData = mapFiles(sortedFiles);
+
+
+    console.log(this.latestTableData);
+    console.log(this.historyTableData);
+    console.log(this.showAllTableData);
+    this.onTabChange('latest');
   }
+
 
   /** Unique version list derived from current tableData for the filter dropdown */
   get availableVersions(): string[] {

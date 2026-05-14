@@ -39,9 +39,9 @@ export class MasterService {
 
         const menus = res?.filePaths
           ? Object.keys(res.filePaths).map((item) => ({
-              processName: item,
-              isSelected: false,
-            }))
+            processName: item,
+            isSelected: false,
+          }))
           : [];
 
         return this.getDetailsWithProcessForPd(
@@ -105,5 +105,9 @@ export class MasterService {
     return this.http.get(
       `${MFG_BASE_URL}/asset/v1/bag/getStyleVersionByBagNo?bagNo=${bagNo}`,
     );
+  }
+
+  getFileConfigRoleMapping(MFG_BASE_URL: string) {
+    return this.http.get(`${MFG_BASE_URL}/asset/v1/linkUserFileConfig/getAll`);
   }
 }
