@@ -9,44 +9,83 @@
 </div>
 
 <div class="dashboard-component">
-
   <!-- Search Panel -->
   <div class="search-panel">
     <div class="search-field">
       <label class="field-label">Enter ID</label>
       <div class="input-wrapper">
-        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
-          <path fill="currentColor"
-            d="M10 2a8 8 0 1 0 4.906 14.32l4.387 4.387 1.414-1.414-4.387-4.387A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12A6 6 0 0 1 10 4Z" />
+        <svg
+          class="input-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="14"
+          height="14"
+        >
+          <path
+            fill="currentColor"
+            d="M10 2a8 8 0 1 0 4.906 14.32l4.387 4.387 1.414-1.414-4.387-4.387A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12A6 6 0 0 1 10 4Z"
+          />
         </svg>
-        <input type="text" class="field-input" placeholder="Style / Sketch No." [(ngModel)]="styleSketchNumber"
-          (input)="removeAllFilledDetails()" (keydown.enter)="enterPressed(styleSketchNumber)"
-          [disabled]="!!styleSketchNumberVersion || !!bagNo" />
+        <input
+          type="text"
+          class="field-input"
+          placeholder="Style / Sketch No."
+          [(ngModel)]="styleSketchNumber"
+          (input)="removeAllFilledDetails()"
+          (keydown.enter)="enterPressed(styleSketchNumber)"
+          [disabled]="!!styleSketchNumberVersion || !!bagNo"
+        />
       </div>
     </div>
 
     <div class="search-field">
       <label class="field-label">Enter Style</label>
       <div class="input-wrapper">
-        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
+        <svg
+          class="input-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="14"
+          height="14"
+        >
           <path fill="currentColor" d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" />
         </svg>
-        <input type="text" class="field-input" placeholder="Style version" [(ngModel)]="styleSketchNumberVersion"
-          (input)="removeAllFilledDetails()" (keydown.enter)="getStyleVersionDetails()"
-          [disabled]="!!styleSketchNumber || !!bagNo" />
+        <input
+          type="text"
+          class="field-input"
+          placeholder="Style version"
+          [(ngModel)]="styleSketchNumberVersion"
+          (input)="removeAllFilledDetails()"
+          (keydown.enter)="getStyleVersionDetails()"
+          [disabled]="!!styleSketchNumber || !!bagNo"
+        />
       </div>
     </div>
 
     <div class="search-field">
       <label class="field-label">Enter Bag No</label>
       <div class="input-wrapper">
-        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
-          <path fill="currentColor"
-            d="M19 6h-2a5 5 0 0 0-10 0H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Zm-7-3a3 3 0 0 1 3 3H9a3 3 0 0 1 3-3Zm7 17H5V8h14v12Z" />
+        <svg
+          class="input-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="14"
+          height="14"
+        >
+          <path
+            fill="currentColor"
+            d="M19 6h-2a5 5 0 0 0-10 0H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Zm-7-3a3 3 0 0 1 3 3H9a3 3 0 0 1 3-3Zm7 17H5V8h14v12Z"
+          />
         </svg>
-        <input type="text" class="field-input" placeholder="Bag number" [(ngModel)]="bagNo"
-          (input)="removeAllFilledDetails()" (keydown.enter)="getBagWiseDetails()"
-          [disabled]="!!styleSketchNumber || !!styleSketchNumberVersion" />
+        <input
+          type="text"
+          class="field-input"
+          placeholder="Bag number"
+          [(ngModel)]="bagNo"
+          (input)="removeAllFilledDetails()"
+          (keydown.enter)="getBagWiseDetails()"
+          [disabled]="!!styleSketchNumber || !!styleSketchNumberVersion"
+        />
       </div>
     </div>
 
@@ -64,30 +103,56 @@
 
   <!-- Main layout -->
   <div class="master-container">
-
     <!-- ── View: ID / Bag mode ── -->
     <ng-container *ngIf="!styleSketchNumberVersion">
       <div class="layout-row">
-
         <!-- Sidebar -->
         <aside class="side__bar">
-          <div class="sidebar-section-label" *ngIf="pdMenus.length">PD Files</div>
+          <div class="sidebar-section-label" *ngIf="pdMenus.length">
+            PD Files
+          </div>
           <ng-container *ngFor="let item of pdMenus">
-            <div class="menu-item" [class.active-menu]="item.isSelected" (click)="itemSelected(item, true)">
-              <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
-                <path fill="currentColor"
-                  d="M20 6h-8l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z" />
+            <div
+              class="menu-item"
+              [class.active-menu]="item.isSelected"
+              (click)="itemSelected(item, true)"
+            >
+              <svg
+                class="menu-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+              >
+                <path
+                  fill="currentColor"
+                  d="M20 6h-8l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z"
+                />
               </svg>
               <span class="menu-label">{{ item.processName }}</span>
             </div>
           </ng-container>
 
-          <div class="sidebar-section-label" *ngIf="menus.length">Style Files</div>
+          <div class="sidebar-section-label" *ngIf="menus.length">
+            Style Files
+          </div>
           <ng-container *ngFor="let item of menus">
-            <div class="menu-item" [class.active-menu]="item.isSelected" (click)="itemSelected(item)">
-              <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
-                <path fill="currentColor"
-                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm4 18H6V4h7v5h5v11Z" />
+            <div
+              class="menu-item"
+              [class.active-menu]="item.isSelected"
+              (click)="itemSelected(item)"
+            >
+              <svg
+                class="menu-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+              >
+                <path
+                  fill="currentColor"
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm4 18H6V4h7v5h5v11Z"
+                />
               </svg>
               <span class="menu-label">{{ item.processName }}</span>
             </div>
@@ -95,9 +160,17 @@
 
           <!-- Empty sidebar state -->
           <div class="sidebar-empty" *ngIf="!pdMenus.length && !menus.length">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28">
-              <path fill="currentColor"
-                d="M20 6h-8l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z" opacity=".3" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="28"
+              height="28"
+            >
+              <path
+                fill="currentColor"
+                d="M20 6h-8l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z"
+                opacity=".3"
+              />
             </svg>
             <span>No data yet</span>
           </div>
@@ -107,25 +180,45 @@
         <div class="content-area">
           <div class="section-header">
             <span class="section-title">File Details</span>
-            <span class="section-badge" *ngIf="selectedProcessName">{{ selectedProcessName }}</span>
+            <span class="section-badge" *ngIf="selectedProcessName">{{
+              selectedProcessName
+            }}</span>
           </div>
 
           <!-- Tabs -->
           <div class="tabs" *ngIf="!!selectedProcessName">
-            <button class="tab-btn" [class.active]="selectedTab === 'latest'" (click)="onTabChange('latest')">
+            <button
+              class="tab-btn"
+              [class.active]="selectedTab === 'latest'"
+              (click)="onTabChange('latest')"
+            >
               Latest
             </button>
-            <button class="tab-btn" [class.active]="selectedTab === 'history'" (click)="onTabChange('history')">
+            <button
+              class="tab-btn"
+              [class.active]="selectedTab === 'history'"
+              (click)="onTabChange('history')"
+            >
               History
             </button>
-            <button class="tab-btn" [class.active]="selectedTab === 'showAll'" (click)="onTabChange('showAll')">
+            <button
+              class="tab-btn"
+              [class.active]="selectedTab === 'showAll'"
+              (click)="onTabChange('showAll')"
+            >
               Show All
             </button>
           </div>
 
           <!-- Table -->
           <ng-container
-            *ngIf="latestTableData.length || historyTableData.length || showAllTableData.length; else emptyContent">
+            *ngIf="
+              latestTableData.length ||
+                historyTableData.length ||
+                showAllTableData.length;
+              else emptyContent
+            "
+          >
             <div class="table-wrapper">
               <table class="custom-table">
                 <thead>
@@ -139,40 +232,152 @@
                 </thead>
                 <tbody>
                   <ng-container *ngFor="let group of tableData">
-                    <tr *ngFor="let file of group.files; let i = index" class="table-row">
-                      <td *ngIf="i === 0" [attr.rowspan]="group.files.length" class="version-cell">
+                    <tr
+                      *ngFor="let file of group.files; let i = index"
+                      class="table-row"
+                    >
+                      <td
+                        *ngIf="i === 0"
+                        [attr.rowspan]="group.files.length"
+                        class="version-cell"
+                      >
                         <span class="version-badge">{{ group.version }}</span>
                       </td>
                       <td>
                         <div class="file-cell">
                           <span class="file-name">{{ file.fileName }}</span>
-                          <button class="download-btn" (click)="downloadFile(file)" title="Download">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15">
-                              <path fill="currentColor"
-                                d="M5 20h14v-2H5v2Zm7-18v10.17l3.59-3.58L17 10l-5 5-5-5 1.41-1.41L11 12.17V2h1Z" />
+                          <button
+                            class="download-btn"
+                            (click)="downloadFile(file)"
+                            title="Download"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              width="15"
+                              height="15"
+                            >
+                              <path
+                                fill="currentColor"
+                                d="M5 20h14v-2H5v2Zm7-18v10.17l3.59-3.58L17 10l-5 5-5-5 1.41-1.41L11 12.17V2h1Z"
+                              />
                             </svg>
                           </button>
                         </div>
                       </td>
                       <td>
-                        <div class="thumb-wrapper" *ngIf="checkImagePreview(file); else noPreview">
-                          <img [src]="constructImageUrl(file)" class="image-thumb"
-                            (click)="openFullScreenPreview(file)" />
-                          <div class="thumb-overlay" (click)="openFullScreenPreview(file)">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
-                              <path fill="#fff"
-                                d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z" />
-                            </svg>
+                        <ng-container
+                          *ngIf="checkImagePreview(file); else nonImagePreview"
+                        >
+                          <div
+                            class="thumb-wrapper"
+                            *ngIf="!file._imageLoadFailed; else imgNotFound"
+                          >
+                            <img
+                              [src]="constructImageUrl(file)"
+                              class="image-thumb"
+                              (error)="onImageLoadError(file)"
+                              (click)="openFullScreenPreview(file)"
+                            />
+                            <div
+                              class="thumb-overlay"
+                              (click)="openFullScreenPreview(file)"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="16"
+                                height="16"
+                              >
+                                <path
+                                  fill="#fff"
+                                  d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z"
+                                />
+                              </svg>
+                            </div>
                           </div>
-                        </div>
-                        <ng-template #noPreview>
-                          <span class="no-preview">—</span>
+                          <ng-template #imgNotFound>
+                            <div
+                              class="file-icon img-missing-icon"
+                              title="Image not available"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="28"
+                                height="28"
+                              >
+                                <path
+                                  fill="#9ca3af"
+                                  d="M21 19V5a2 2 0 0 0-2-2H5c-.55 0-1.05.22-1.41.59L20.41 20.41c.37-.36.59-.86.59-1.41ZM2.81 2.81 1.39 4.22 3 5.83V19a2 2 0 0 0 2 2h13.17l1.61 1.61 1.42-1.42L2.81 2.81ZM5 19V7.83l4.88 4.88-2.38 3.04L10.5 19H5Z"
+                                />
+                              </svg>
+                              <span class="file-icon-label">N/A</span>
+                            </div>
+                          </ng-template>
+                        </ng-container>
+                        <ng-template #nonImagePreview>
+                          <div
+                            class="file-icon doc-icon"
+                            *ngIf="isDocPreview(file); else txtOrNone"
+                            title="Document"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              width="28"
+                              height="28"
+                            >
+                              <path
+                                fill="#2b579a"
+                                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"
+                              />
+                              <path
+                                fill="#fff"
+                                opacity=".35"
+                                d="M14 2v6h6L14 2Z"
+                              />
+                            </svg>
+                            <span class="file-icon-label">DOC</span>
+                          </div>
+                          <ng-template #txtOrNone>
+                            <div
+                              class="file-icon txt-icon"
+                              *ngIf="isTxtPreview(file); else noPreview"
+                              title="Text file"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="28"
+                                height="28"
+                              >
+                                <path
+                                  fill="#6b7280"
+                                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"
+                                />
+                                <path
+                                  fill="#fff"
+                                  opacity=".35"
+                                  d="M14 2v6h6L14 2Z"
+                                />
+                              </svg>
+                              <span class="file-icon-label">TXT</span>
+                            </div>
+                          </ng-template>
+                          <ng-template #noPreview>
+                            <span class="no-preview">—</span>
+                          </ng-template>
                         </ng-template>
                       </td>
                       <td>
-                        <span class="type-badge" [attr.data-type]="file.fileType">{{ file.fileType }}</span>
+                        <span
+                          class="type-badge"
+                          [attr.data-type]="file.fileType"
+                          >{{ file.fileType }}</span
+                        >
                       </td>
-                      <td class="date-cell">{{ file.createdDate || '—' }}</td>
+                      <td class="date-cell">{{ file.createdDate || "—" }}</td>
                     </tr>
                   </ng-container>
                 </tbody>
@@ -183,38 +388,66 @@
           <!-- Empty content state -->
           <ng-template #emptyContent>
             <div class="empty-state">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">
-                <path fill="currentColor"
-                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm4 18H6V4h7v5h5v11Z" opacity=".4" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="48"
+                height="48"
+              >
+                <path
+                  fill="currentColor"
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm4 18H6V4h7v5h5v11Z"
+                  opacity=".4"
+                />
               </svg>
               <p>Select a process from the sidebar to view files</p>
             </div>
           </ng-template>
         </div>
-
       </div>
     </ng-container>
 
     <!-- ── View: Style version mode ── -->
-    <ng-container *ngIf="styleSketchNumberVersion && pdMenus.length>0">
+    <ng-container *ngIf="styleSketchNumberVersion && pdMenus.length > 0">
       <div class="layout-row">
-
         <!-- Folder sidebar -->
         <aside class="side__bar">
-          <div class="sidebar-section-label" *ngIf="pdMenus.length">Folders</div>
+          <div class="sidebar-section-label" *ngIf="pdMenus.length">
+            Folders
+          </div>
           <ng-container *ngFor="let item of pdMenus">
-            <div class="menu-item" [class.active-menu]="item.isSelected" (click)="onFolderSelect(item)">
-              <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
-                <path fill="currentColor"
-                  d="M20 6h-8l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z" />
+            <div
+              class="menu-item"
+              [class.active-menu]="item.isSelected"
+              (click)="onFolderSelect(item)"
+            >
+              <svg
+                class="menu-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+              >
+                <path
+                  fill="currentColor"
+                  d="M20 6h-8l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z"
+                />
               </svg>
               <span class="menu-label">{{ item.processName }}</span>
             </div>
           </ng-container>
           <div class="sidebar-empty" *ngIf="!pdMenus.length">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28">
-              <path fill="currentColor"
-                d="M20 6h-8l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z" opacity=".3" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="28"
+              height="28"
+            >
+              <path
+                fill="currentColor"
+                d="M20 6h-8l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z"
+                opacity=".3"
+              />
             </svg>
             <span>No folders</span>
           </div>
@@ -224,51 +457,109 @@
         <aside class="side__bar">
           <div class="sidebar-search-wrap">
             <div class="sidebar-search-input-wrap">
-              <svg class="sidebar-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13"
-                height="13">
-                <path fill="currentColor"
-                  d="M10 2a8 8 0 1 0 4.906 14.32l4.387 4.387 1.414-1.414-4.387-4.387A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12A6 6 0 0 1 10 4Z" />
+              <svg
+                class="sidebar-search-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="13"
+                height="13"
+              >
+                <path
+                  fill="currentColor"
+                  d="M10 2a8 8 0 1 0 4.906 14.32l4.387 4.387 1.414-1.414-4.387-4.387A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12A6 6 0 0 1 10 4Z"
+                />
               </svg>
-              <input type="text" class="sidebar-search-input" placeholder="Search versions…"
-                [(ngModel)]="versionSearchQuery" />
-              <button *ngIf="versionSearchQuery" class="sidebar-search-clear" (click)="versionSearchQuery = ''"
-                title="Clear">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12">
-                  <path fill="currentColor"
-                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+              <input
+                type="text"
+                class="sidebar-search-input"
+                placeholder="Search versions…"
+                [(ngModel)]="versionSearchQuery"
+              />
+              <button
+                *ngIf="versionSearchQuery"
+                class="sidebar-search-clear"
+                (click)="versionSearchQuery = ''"
+                title="Clear"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="12"
+                  height="12"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
                 </svg>
               </button>
             </div>
             <span class="sidebar-search-count" *ngIf="versionSearchQuery">
-              {{ filteredStyleVersionArray.length }} / {{ styleVersionArray.length }}
+              {{ filteredStyleVersionArray.length }} /
+              {{ styleVersionArray.length }}
             </span>
           </div>
 
           <ng-container *ngFor="let item of filteredStyleVersionArray">
-            <div class="menu-item" [class.active-menu]="item.isSelected" (click)="styleVersionSelected(item)">
-              <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
-                <path fill="currentColor"
-                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8Zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7Z" />
+            <div
+              class="menu-item"
+              [class.active-menu]="item.isSelected"
+              (click)="styleVersionSelected(item)"
+            >
+              <svg
+                class="menu-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+              >
+                <path
+                  fill="currentColor"
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8Zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7Z"
+                />
               </svg>
-              <span class="menu-label" [innerHTML]="highlightMatch(item.processName, versionSearchQuery)"></span>
+              <span
+                class="menu-label"
+                [innerHTML]="
+                  highlightMatch(item.processName, versionSearchQuery)
+                "
+              ></span>
             </div>
           </ng-container>
 
           <!-- No results -->
-          <div class="sidebar-empty" *ngIf="versionSearchQuery && !filteredStyleVersionArray.length">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28">
-              <path fill="currentColor"
+          <div
+            class="sidebar-empty"
+            *ngIf="versionSearchQuery && !filteredStyleVersionArray.length"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="28"
+              height="28"
+            >
+              <path
+                fill="currentColor"
                 d="M10 2a8 8 0 1 0 4.906 14.32l4.387 4.387 1.414-1.414-4.387-4.387A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12A6 6 0 0 1 10 4Z"
-                opacity=".3" />
+                opacity=".3"
+              />
             </svg>
             <span>No match found</span>
           </div>
 
           <!-- Empty (no data at all) -->
           <div class="sidebar-empty" *ngIf="!styleVersionArray.length">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28">
-              <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z"
-                opacity=".3" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="28"
+              height="28"
+            >
+              <path
+                fill="currentColor"
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z"
+                opacity=".3"
+              />
             </svg>
             <span>No versions</span>
           </div>
@@ -278,18 +569,32 @@
         <div class="content-area">
           <div class="section-header">
             <span class="section-title">File Details</span>
-            <span class="section-badge" *ngIf="selectedProcessName">{{ selectedProcessName }}</span>
+            <span class="section-badge" *ngIf="selectedProcessName">{{
+              selectedProcessName
+            }}</span>
           </div>
 
           <!-- Tabs -->
           <div class="tabs" *ngIf="!!selectedProcessName">
-            <button class="tab-btn" [class.active]="selectedTab === 'latest'" (click)="onTabChange('latest')">
+            <button
+              class="tab-btn"
+              [class.active]="selectedTab === 'latest'"
+              (click)="onTabChange('latest')"
+            >
               Latest
             </button>
-            <button class="tab-btn" [class.active]="selectedTab === 'history'" (click)="onTabChange('history')">
+            <button
+              class="tab-btn"
+              [class.active]="selectedTab === 'history'"
+              (click)="onTabChange('history')"
+            >
               History
             </button>
-            <button class="tab-btn" [class.active]="selectedTab === 'showAll'" (click)="onTabChange('showAll')">
+            <button
+              class="tab-btn"
+              [class.active]="selectedTab === 'showAll'"
+              (click)="onTabChange('showAll')"
+            >
               Show All
             </button>
           </div>
@@ -311,28 +616,129 @@
                     <td>
                       <div class="file-cell">
                         <span class="file-name">{{ file.name }}</span>
-                        <button class="download-btn" (click)="downloadFile(file)" title="Download">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15">
-                            <path fill="currentColor"
-                              d="M5 20h14v-2H5v2Zm7-18v10.17l3.59-3.58L17 10l-5 5-5-5 1.41-1.41L11 12.17V2h1Z" />
+                        <button
+                          class="download-btn"
+                          (click)="downloadFile(file)"
+                          title="Download"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            width="15"
+                            height="15"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M5 20h14v-2H5v2Zm7-18v10.17l3.59-3.58L17 10l-5 5-5-5 1.41-1.41L11 12.17V2h1Z"
+                            />
                           </svg>
                         </button>
                       </div>
                     </td>
                     <td>{{ file.version }}</td>
                     <td>
-                      <div class="thumb-wrapper" *ngIf="checkImagePreview(file); else noPreview2">
-                        <img [src]="constructImageUrl(file)" class="image-thumb"
-                          (click)="openFullScreenPreview(file)" />
-                        <div class="thumb-overlay" (click)="openFullScreenPreview(file)">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="#fff"
-                              d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z" />
-                          </svg>
+                      <ng-container
+                        *ngIf="checkImagePreview(file); else nonImagePreview2"
+                      >
+                        <div
+                          class="thumb-wrapper"
+                          *ngIf="!file._imageLoadFailed; else imgNotFound2"
+                        >
+                          <img
+                            [src]="constructImageUrl(file)"
+                            class="image-thumb"
+                            (error)="onImageLoadError(file)"
+                            (click)="openFullScreenPreview(file)"
+                          />
+                          <div
+                            class="thumb-overlay"
+                            (click)="openFullScreenPreview(file)"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              width="16"
+                              height="16"
+                            >
+                              <path
+                                fill="#fff"
+                                d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z"
+                              />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                      <ng-template #noPreview2>
-                        <span class="no-preview">—</span>
+                        <ng-template #imgNotFound2>
+                          <div
+                            class="file-icon img-missing-icon"
+                            title="Image not available"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              width="28"
+                              height="28"
+                            >
+                              <path
+                                fill="#9ca3af"
+                                d="M21 19V5a2 2 0 0 0-2-2H5c-.55 0-1.05.22-1.41.59L20.41 20.41c.37-.36.59-.86.59-1.41ZM2.81 2.81 1.39 4.22 3 5.83V19a2 2 0 0 0 2 2h13.17l1.61 1.61 1.42-1.42L2.81 2.81ZM5 19V7.83l4.88 4.88-2.38 3.04L10.5 19H5Z"
+                              />
+                            </svg>
+                            <span class="file-icon-label">N/A</span>
+                          </div>
+                        </ng-template>
+                      </ng-container>
+                      <ng-template #nonImagePreview2>
+                        <div
+                          class="file-icon doc-icon"
+                          *ngIf="isDocPreview(file); else txtOrNone2"
+                          title="Document"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            width="28"
+                            height="28"
+                          >
+                            <path
+                              fill="#2b579a"
+                              d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"
+                            />
+                            <path
+                              fill="#fff"
+                              opacity=".35"
+                              d="M14 2v6h6L14 2Z"
+                            />
+                          </svg>
+                          <span class="file-icon-label">DOC</span>
+                        </div>
+                        <ng-template #txtOrNone2>
+                          <div
+                            class="file-icon txt-icon"
+                            *ngIf="isTxtPreview(file); else noPreview2"
+                            title="Text file"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              width="28"
+                              height="28"
+                            >
+                              <path
+                                fill="#6b7280"
+                                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"
+                              />
+                              <path
+                                fill="#fff"
+                                opacity=".35"
+                                d="M14 2v6h6L14 2Z"
+                              />
+                            </svg>
+                            <span class="file-icon-label">TXT</span>
+                          </div>
+                        </ng-template>
+                        <ng-template #noPreview2>
+                          <span class="no-preview">—</span>
+                        </ng-template>
                       </ng-template>
                     </td>
                   </tr>
@@ -343,18 +749,24 @@
 
           <ng-template #emptyVersionContent>
             <div class="empty-state">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">
-                <path fill="currentColor"
-                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm4 18H6V4h7v5h5v11Z" opacity=".4" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="48"
+                height="48"
+              >
+                <path
+                  fill="currentColor"
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm4 18H6V4h7v5h5v11Z"
+                  opacity=".4"
+                />
               </svg>
               <p>Select a folder and version to view files</p>
             </div>
           </ng-template>
         </div>
-
       </div>
     </ng-container>
-
   </div>
 </div>
 

@@ -710,6 +710,35 @@
   font-size: 13px;
 }
 
+.file-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: #fff;
+
+  svg { display: block; }
+
+  &-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    line-height: 1;
+  }
+
+  &.doc-icon .file-icon-label { color: #2b579a; }
+  &.txt-icon .file-icon-label { color: #6b7280; }
+  &.img-missing-icon {
+    background: #f9fafb;
+    .file-icon-label { color: #9ca3af; }
+  }
+}
+
 // ─── Image thumbnail ──────────────────────────────────────────────────────────
 .thumb-wrapper {
   position: relative;

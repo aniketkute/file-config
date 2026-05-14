@@ -39,9 +39,9 @@ export class MasterService {
 
         const menus = res?.filePaths
           ? Object.keys(res.filePaths).map((item) => ({
-            processName: item,
-            isSelected: false,
-          }))
+              processName: item,
+              isSelected: false,
+            }))
           : [];
 
         return this.getDetailsWithProcessForPd(
@@ -52,7 +52,7 @@ export class MasterService {
             const pdData = pdRes?.data || {};
             const pdMenus: any[] = [];
 
-            if (pdData['briefImage']) {
+            if (pdData['briefImage'].length) {
               pdMenus.push({ processName: 'Brief Images', isSelected: false });
             }
 
